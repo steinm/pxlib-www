@@ -17,7 +17,7 @@ pxlib.
 <p><p> <font size=+3><b>Features</b></font></p><table width=90% cellpadding=5><tr><td>
 <UL>
   <LI>Reading Paradox DB files
-	<LI>Output of sql, csv
+	<LI>Output of sql, csv, html
 	<LI>Recoding of character fields
 	<LI>Reading Blobs (.MB files) and write them to single files
 </UL>
@@ -25,10 +25,10 @@ pxlib.
 </td></tr></table>
 <p><p> <font size=+3><b>Downloading</b></font></p><table width=90% cellpadding=5><tr><td>
 
-<p> The most recent release of pxlib is version 0.0.8.
+<p> The most recent release of pxlib is version 0.2.0.
 
 <ul>
-<li>Source and Debian package of version 0.0.8 for PPC is available at <A HREF="http://sourceforge.net/projects/pxlib/">sourceforge</A>
+<li>Source and Debian package of version 0.2.0 for PPC is available at <A HREF="http://sourceforge.net/projects/pxlib/">sourceforge</A>
 </ul>
 
 <p>To compile this you'll only need a C Compiler, i recent glibc with iconv or
@@ -46,6 +46,103 @@ a not so recent glibc and librecode.
 
 <table border=1>
  <tr>
+  <td valign=top>October 30, 2003</td>
+	<td valign=top>version 0.2.0</td>
+	<td>
+	 <ul>
+	  <li>update to latest autoconf tools
+    <li>added support for pkg-config
+    <li>added new function PX_new3() which allows to also set user data which
+		    is passed to the error handler
+    <li>added generic way to set and get parameters
+    <li>added support for external read, write, tell, seek functions
+   </ul>
+	</td>
+ </tr>
+
+ <tr>
+  <td valign=top>September 29, 2003</td>
+	<td valign=top>version 0.1.9</td>
+	<td>
+	 <ul>
+	  <li>encoding for data, that is to be written in a record can be set
+    <li>build internal primary index for faster access. This will not
+		    speed up searching but accessing records by record number.
+    <li>fixed reading of primary index, now that I understand how it works
+    <li>fixed data block handling (still not perfect, but works if records are
+		    stored sequentially)
+    <li>fixed several errors in fileformat which where due to lack of information
+    <li>provide header field 'fileUpdateTime'
+    <li>access data block as linked in list and not as stored in file
+    <li>new functions to manipulate record data
+    <li>made many error message better understandable
+    <li>initial support to write db files
+
+   </ul>
+	</td>
+ </tr>
+
+ <tr>
+  <td valign=top>August 21, 2003</td>
+	<td valign=top>version 0.1.2</td>
+	<td>
+	 <ul>
+	  <li>primary index files can be read
+    <li>added recno to struct px_datablockinfo
+    <li>PX_get_record returns in referenced parameter deleted whether a
+		    record is deleted or not
+   </ul>
+	</td>
+ </tr>
+
+ <tr>
+  <td valign=top>August 15, 2003</td>
+	<td valign=top>version 0.1.1</td>
+	<td>
+	 <ul>
+	  <li>fixed segm fault when calling PX_get_record()
+   </ul>
+	</td>
+ </tr>
+
+ <tr>
+  <td valign=top>August 14, 2003</td>
+	<td valign=top>version 0.1.0</td>
+	<td>
+	 <ul>
+	  <li>New function PX_get_record2() which has two extra parameter.
+		    One to enable reading of deleted records and one to return
+		    internal data about the data block from which the record has
+		    been read.
+    <li>added pxh->theonumrecords which is the number of records which
+		    theoretically fit into all data blocks. This number can be
+		    much bigger that the number of records in the header. Also
+		    increases the max. record number to theonumrecords
+		    when reading a record.
+    <li>DB files can contain many more records than the number of records
+		    in the header. The remaining records are left overs, which were
+		    deleted but not removed from the file. pxlib can now handle those
+		    files.
+   </ul>
+	</td>
+ </tr>
+
+ <tr>
+  <td valign=top>August 11, 2003</td>
+	<td valign=top>version 0.0.9</td>
+	<td>
+	 <ul>
+	  <li>man pages are not created if docbook-to-man is missing
+    <li>fixed many endianess bugs
+    <li>new function PX_is_bigendian()
+    <li>new function PX_has_recode_support()
+    <li>fixed compile error with older versions of gcc
+    <li>fixed two potential segm faults
+   </ul>
+	</td>
+ </tr>
+
+ <tr>
   <td valign=top>July 31, 2003</td>
 	<td valign=top>version 0.0.8</td>
 	<td>
@@ -54,90 +151,90 @@ a not so recent glibc and librecode.
 	  <li>recoding of data fields with iconv
    </ul>
 	</td>
+ </tr>
+
+ <tr>
+  <td valign=top>July 23, 2003</td>
+  <td valign=top>version 0.0.7</td>
+  <td>
+   <ul>
+    <li>read more fields from the header,
+    <li>added spec file to build rpms,
+  	 <li>alpha fields are automatically recoded if required,
+    <li>function to access alpha field data
+   </ul>
+  </td>
+ </tr>
+
+ <tr>
+  <td valign=top>July 18, 2003</td>
+  <td valign=top>version 0.0.6</td>
+  <td>
+   <ul>
+	  <li>more documentation,
+    <li>more functions to access database schema (PX_get_field(), PX_get_fields()),
+    <li>much better check for errors as not passing a document or out of range values
+	 </ul>
+  </td>
+ </tr>
+
+ <tr>
+  <td valign=top>July 18, 2003</td>
+  <td valign=top>version 0.0.5</td>
+  <td>
+   <ul>
+	  <li>added PX_delete()
+	  <li>many memory leaks fixed
+	  <li>proper use of memory allocation functions
+	 </ul>
+  </td>
 </tr>
 
-<tr>
- <td valign=top>July 23, 2003</td>
- <td valign=top>version 0.0.7</td>
- <td>
-  <ul>
-   <li>read more fields from the header,
-   <li>added spec file to build rpms,
-  	<li>alpha fields are automatically recoded if required,
-   <li>function to access alpha field data
-  </ul>
- </td>
-</tr>
+ <tr>
+  <td valign=top>June 11, 2003</td>
+  <td valign=top>version 0.0.4</td>
+  <td>
+   <ul>
+	  <li>fixed segm fault if input file does not exist
+	  <li>maxTableSize may now be larger as 32
+	  <li>add check for endianess
+	  <li>added data conversion functions
+	 </ul>
+  </td>
+ </tr>
 
-<tr>
- <td valign=top>July 18, 2003</td>
- <td valign=top>version 0.0.6</td>
- <td>
-  <ul>
-	 <li>more documentation,
-   <li>more functions to access database schema (PX_get_field(), PX_get_fields()),
-   <li>much better check for errors as not passing a document or out of range values
-	</ul>
- </td>
-</tr>
+ <tr>
+  <td valign=top>Not published</td>
+  <td valign=top>version 0.0.3</td>
+  <td>
+   <ul>
+	  <li>check for zero record size and header size
+	  <li>added missing header files in distribution
+	  <li>added conversion routine from Gregorian date to serial date number
+	 </ul>
+  </td>
+ </tr>
 
-<tr>
- <td valign=top>July 18, 2003</td>
- <td valign=top>version 0.0.5</td>
- <td>
-  <ul>
-	 <li>added PX_delete()
-	 <li>many memory leaks fixed
-	 <li>proper use of memory allocation functions
-	</ul>
- </td>
-</tr>
-
-<tr>
- <td valign=top>June 11, 2003</td>
- <td valign=top>version 0.0.4</td>
- <td>
-  <ul>
-	 <li>fixed segm fault if input file does not exist
-	 <li>maxTableSize may now be larger as 32
-	 <li>add check for endianess
-	 <li>added data conversion functions
-	</ul>
- </td>
-</tr>
-
-<tr>
- <td valign=top>Not published</td>
- <td valign=top>version 0.0.3</td>
- <td>
-  <ul>
-	 <li>check for zero record size and header size
-	 <li>added missing header files in distribution
-	 <li>added conversion routine from Gregorian date to serial date number
-	</ul>
- </td>
-</tr>
-
-<tr>
- <td valign=top>June 03, 2003</td>
- <td valign=top>version 0.0.2</td>
- <td>
-  <ul>
-	 <li>support for blobs, bug fixes
-	</ul>
- </td>
-</tr>
-
-<tr>
- <td valign=top>April 29, 2003</td>
- <td valign=top>version 0.0.1</td>
- <td>
-  <ul>
-	 <li>initial release
-	</ul>
- </td>
-</tr>
-
+ <tr>
+  <td valign=top>June 03, 2003</td>
+  <td valign=top>version 0.0.2</td>
+  <td>
+   <ul>
+	  <li>support for blobs, bug fixes
+	 </ul>
+  </td>
+ </tr>
+ 
+ <tr>
+  <td valign=top>April 29, 2003</td>
+  <td valign=top>version 0.0.1</td>
+  <td>
+   <ul>
+	  <li>initial release
+	 </ul>
+  </td>
+ </tr>
+ 
 </table>
 
 </td></tr></table><p><font size=-1>

@@ -14,16 +14,17 @@ information and the table structure of the database.
 </td></tr></table>
 <p><p> <font size=+3><b>Features</b></font></p><table width=90% cellpadding=5><tr><td>
 <UL>
-  <LI>Reading Paradox DB files
+  <LI>Reading Paradox DB files and output them as csv, sql or html
+	<LI>Output many information about a paradox file
 </UL>
 
 </td></tr></table>
 <p><p> <font size=+3><b>Downloading</b></font></p><table width=90% cellpadding=5><tr><td>
 
-<p> The most recent release of pxview is version 0.0.6.
+<p> The most recent release of pxview is version 0.1.4.
 
 <ul>
-<li>Source and Debian package of version 0.0.6 for PPC is available at <A HREF="http://sourceforge.net/projects/pxlib/">sourceforge</A>
+<li>Source and Debian package of version 0.1.4 for PPC is available at <A HREF="http://sourceforge.net/projects/pxlib/">sourceforge</A>
 </ul>
 
 <p> To compile this you'll only need a C Compiler.
@@ -39,6 +40,90 @@ information and the table structure of the database.
 <p><p> <font size=+3><b>recent news</b></font></p><table width=90% cellpadding=5><tr><td>
 
 <table border=1>
+
+<tr>
+ <td valign=top>October 30, 2003</td>
+ <td>version 0.1.4</td>
+ <td>
+  <ul>
+	 <li>support for gsf library
+	</ul>
+ </td>
+</tr>
+
+<tr>
+ <td valign=top>September 29, 2003</td>
+ <td>version 0.1.3</td>
+ <td>
+  <ul>
+	 <li>output file with name "-" means stdout
+    <li>csv output of .PX files got an extra column with the block number of
+		    the current record for better investigation of the index file
+    <li>output of first and last block number
+    <li>option 'output' is now 'output-file'
+    <li>fixed debug output
+    <li>added output of fileUpdateTime
+    <li>some smaller cleanups
+    <li>Use PX_get_data_byte() instead accessing the data directly
+	</ul>
+ </td>
+</tr>
+
+<tr>
+ <td valign=top>August 21, 2003</td>
+ <td>version 0.1.2</td>
+ <td>
+  <ul>
+	 <li>added option --primary-index-file to read a primary index which
+	     accelerates access
+   <li>debug mode: output information about the datablock where a record is stored
+   <li>usage output has been to restrictive if run as pxview
+   <li>options --output-deleted, --delete-table has been misinterpreted
+   <li>new option --mark-deleted to mark those records which are deleted
+	    the csv and html ouput will have an extra column
+	</ul>
+ </td>
+</tr>
+
+<tr>
+ <td valign=top>August 18, 2003</td>
+ <td>version 0.1.1</td>
+ <td>
+  <ul>
+	 <li>html output
+   <li>field selection is case insenitive
+	</ul>
+ </td>
+</tr>
+
+<tr>
+ <td valign=top>August 14, 2003</td>
+ <td>version 0.1.0</td>
+ <td>
+  <ul>
+	 <li>- output modified flags 1 and 2 in verbose mode
+   <li>added aliases --include-blobs and --delete-table for
+	     --includeblobs and --deletetable
+   <li>allow to read deleted records (new option --output-deleted)
+   <li>output calculated size of a record
+   <li>use own error handler
+	</ul>
+ </td>
+</tr>
+
+<tr>
+ <td valign=top>August 11, 2003</td>
+ <td>version 0.0.7</td>
+ <td>
+  <ul>
+	 <li>man pages are not created if docbook-to-man is missing
+   <li>program returns 1 in case of error else 0
+   <li>better sql output
+   <li>fixed potential segm fault
+   <li>moved manpage into section 1
+	</ul>
+ </td>
+</tr>
 
 <tr>
  <td valign=top>July 31, 2003</td>
