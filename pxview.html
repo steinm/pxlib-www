@@ -22,10 +22,10 @@ show some information and the table structure of the database.
 </td></tr></table>
 <p><p> <font size=+3><b>Downloading</b></font></p><table width=90% cellpadding=5><tr><td>
 
-<p> The most recent release of pxview is version 0.1.5.
+<p> The most recent release of pxview is version 0.1.9.
 
 <ul>
-<li>Source and Debian package of version 0.1.5 for PPC is available at <A HREF="http://sourceforge.net/projects/pxlib/">sourceforge</A>
+<li>Source and Debian package of version 0.1.9 for PPC is available at <A HREF="http://sourceforge.net/projects/pxlib/">sourceforge</A>
 </ul>
 
 <p> To compile this you'll only need a C Compiler.
@@ -41,6 +41,60 @@ show some information and the table structure of the database.
 <p><p> <font size=+3><b>recent news</b></font></p><table width=90% cellpadding=5><tr><td>
 
 <table border=1>
+
+<tr>
+ <td valign=top>January 08, 2004</td>
+ <td>version 0.1.9</td>
+ <td>
+  <ul>
+    <li> mask ' and tabulator in sql and sqlite output
+    <li> use ',' as the default separator for fields in csv output
+    <li> Mask the enclosure char in csv output if it occurs in a field value
+    <li> pxfCurrency and pxfNumber are mapped to double in sql output
+    <li> fixed BCD and Date fields in sql output
+    <li> columns without a name will be named 'column%d' (such columns
+	  exist in primary index files)
+    <li> added option --version
+    <li> New option --without-head to suppress first line with field
+	  names in csv output
+    <li> added complete header line to csv output of primary index files
+	</ul>
+ </td>
+</tr>
+
+<tr>
+ <td valign=top>December 11, 2003</td>
+ <td>version 0.1.8</td>
+ <td>
+  <ul>
+    <li> All float values will formated with %g and not %f
+    <li> sql output uses by default INSERT-statements, --use-copy
+	  enforces the use of the COPY-statement which was the default
+	  up to version 0.1.7
+	</ul>
+ </td>
+</tr>
+
+<tr>
+ <td valign=top>December 09, 2003</td>
+ <td>version 0.1.7</td>
+ <td>
+  <ul>
+   <li> First line of HTML output uses &lt;th&gt; instead of &lt;td&gt;&lt;b&gt;
+   <li> added configure option --with-memory-debug
+	</ul>
+ </td>
+</tr>
+
+<tr>
+ <td valign=top>November 17, 2003</td>
+ <td>version 0.1.6</td>
+ <td>
+  <ul>
+   <li> fixed freeing of memory
+	</ul>
+ </td>
+</tr>
 
 <tr>
  <td valign=top>November 11, 2003</td>
