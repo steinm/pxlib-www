@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>PX_GET_RECORD2</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"></HEAD
+><BODY
+CLASS="REFENTRY"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><H1
+><A
+NAME="AEN1"
+></A
+>PX_GET_RECORD2</H1
+><DIV
+CLASS="REFNAMEDIV"
+><A
+NAME="AEN15"
+></A
+><H2
+>Name</H2
+>PX_get_record2&nbsp;--&nbsp;Returns record in Paradox file</DIV
+><DIV
+CLASS="REFSYNOPSISDIV"
+><A
+NAME="AEN18"
+></A
+><H2
+>Synopsis</H2
+><P
+>#include &lt;paradox.h&gt;</P
+><P
+>int PX_get_record2(pxdoc_t *pxdoc, int recno, int *deleted, pxdatablockinfo_t *pxdbinfo)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN21"
+></A
+><H2
+>DESCRIPTION</H2
+><P
+>This function is similar to PX_get_record(3) but takes two extra
+		  parameters. If *deleted is set to 1 the function will consider any
+			record in the database, even those which are deleted. If *pxdbinfo is
+			not NULL, the function will return some information about the data block
+			where the record has been read from. You will have to allocate memory
+			for pxdbinfo before calling PX_get_record2.</P
+><P
+>On return *deleted will be set to 1 if the requested record is
+		  deleted or 0 if it is not deleted. The struct pxdatablockinfo_t has
+			the following fields:</P
+><P
+></P
+><DIV
+CLASS="VARIABLELIST"
+><DL
+><DT
+>blockpos (long)</DT
+><DD
+><P
+>File positon where the block starts. The first six bytes
+					  of the block contain the header, followed by the record data.
+					</P
+></DD
+><DT
+>recordpos (long)</DT
+><DD
+><P
+>File position where the requested record starts.</P
+></DD
+><DT
+>size (int)</DT
+><DD
+><P
+>Size of the data block without the six bytes for the header.
+					</P
+></DD
+><DT
+>recno (int)</DT
+><DD
+><P
+>Record number within the data block. The first record in the
+					  block has number 0.</P
+></DD
+><DT
+>numrecords (int)</DT
+><DD
+><P
+>The number of records in this block.</P
+></DD
+><DT
+>number (int)</DT
+><DD
+><P
+>The number of the data block.</P
+></DD
+></DL
+></DIV
+><P
+>This function may return records with invalid data, because records
+		  are not explizitly marked as deleted, but rather the size of a valid data
+			block is modified. A data block is a fixed size area in the file which
+			holds a certain number of records. If for some
+			reason a data block has newer been completely filled with records, the
+			algorithmn anticipates deleted records in this data block, which are not
+			there. This often happens with the last data block in a file, which is
+			likely to not being fully filled with records.</P
+><P
+>If you accessing several records, do it in ascending order, because
+		  this is the most efficient way.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN52"
+></A
+><H2
+>RETURN VALUE</H2
+><P
+>Returns 0 on success and -1 on failure.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN55"
+></A
+><H2
+>SEE ALSO</H2
+><P
+>PX_get_field(3), PX_get_record(3)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN58"
+></A
+><H2
+>AUTHOR</H2
+><P
+>This manual page was written by Uwe Steinmann <CODE
+CLASS="EMAIL"
+>&#60;<A
+HREF="mailto:uwe@steinmann.cx"
+>uwe@steinmann.cx</A
+>&#62;</CODE
+>.</P
+></DIV
+></BODY
+></HTML
+>

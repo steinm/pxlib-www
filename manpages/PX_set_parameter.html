@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>PX_SET_PARAMETER</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"></HEAD
+><BODY
+CLASS="REFENTRY"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><H1
+><A
+NAME="AEN1"
+></A
+>PX_SET_PARAMETER</H1
+><DIV
+CLASS="REFNAMEDIV"
+><A
+NAME="AEN15"
+></A
+><H2
+>Name</H2
+>PX_set_parameter&nbsp;--&nbsp;Sets various parameters</DIV
+><DIV
+CLASS="REFSYNOPSISDIV"
+><A
+NAME="AEN18"
+></A
+><H2
+>Synopsis</H2
+><P
+>#include &lt;paradox.h&gt;</P
+><P
+>int PX_set_parameter(pxdoc_t *pxdoc, const char *name, const char *value)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN21"
+></A
+><H2
+>DESCRIPTION</H2
+><P
+>Sets the parameter <CODE
+CLASS="OPTION"
+>name</CODE
+> to the value
+		  <CODE
+CLASS="OPTION"
+>value</CODE
+>. This function must be used for all values
+			of type string. float-values can be set with PX_set_value(3).
+			<CODE
+CLASS="OPTION"
+>name</CODE
+> may be one of the following.</P
+><P
+></P
+><DIV
+CLASS="VARIABLELIST"
+><DL
+><DT
+>tablename</DT
+><DD
+><P
+>The name of the table as it will be stored in the datbase
+					  header.
+					</P
+></DD
+><DT
+>targetencoding</DT
+><DD
+><P
+>The encoding for the output. Data which is being read with
+					  one of the PX_get_data_xxx(3) functions will return string data
+						in the targetencoding.
+					</P
+></DD
+><DT
+>inputencoding</DT
+><DD
+><P
+>The econding of the input data which is to be stored into the
+					  database.
+					</P
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN40"
+></A
+><H2
+>RETURN VALUE</H2
+><P
+>Returns 0 on success and -1 on failure.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN43"
+></A
+><H2
+>SEE ALSO</H2
+><P
+>PX_get_parameter(3), PX_set_value(3)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN46"
+></A
+><H2
+>AUTHOR</H2
+><P
+>This manual page was written by Uwe Steinmann <CODE
+CLASS="EMAIL"
+>&#60;<A
+HREF="mailto:uwe@steinmann.cx"
+>uwe@steinmann.cx</A
+>&#62;</CODE
+>.</P
+></DIV
+></BODY
+></HTML
+>

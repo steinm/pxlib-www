@@ -1,0 +1,1260 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>PXLIB</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"></HEAD
+><BODY
+CLASS="REFENTRY"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><H1
+><A
+NAME="AEN1"
+></A
+>PXLIB</H1
+><DIV
+CLASS="REFNAMEDIV"
+><A
+NAME="AEN15"
+></A
+><H2
+>Name</H2
+>pxlib&nbsp;--&nbsp;Library to read and write Paradox databases</DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN18"
+></A
+><H2
+>DESCRIPTION</H2
+><P
+>pxlib is a library to read and write Paradox databases. It is far
+		  from being complete but should be very helpful for those working on
+			unix and having the need to handle paradox databases, blob files and
+			primary indexes.
+			</P
+><P
+>pxlib is a C-library with bindings for Python and PHP.
+		  The later is part of PECL (http://pecl.php.net).
+		  This documentation will only describe the functions of the C-library,
+			though most of what is said here can be applied to the other language
+			bindings.
+			The PHP extension of pxlib is documented in PEAR. The extension is
+			called Paradox.</P
+><P
+>This library is the base for a gnumeric plugin which has been
+		  officially added to gnumeric in version 1.4.0.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN23"
+></A
+><H2
+>GETTING STARTED</H2
+><P
+>Programs which want to use pxlib will have to include the
+		  header file <TT
+CLASS="LITERAL"
+>paradox.h</TT
+> and link against libpx.
+			Before reading or writing a
+			database file the library should be initialized with
+			<CODE
+CLASS="FUNCTION"
+>PX_boot(3)</CODE
+>. It will set the locale and selects
+			the messages in your language as defined by the environment variable
+			LC_ALL. The library should
+			be finalized by <CODE
+CLASS="FUNCTION"
+>PS_shutdown(3)</CODE
+>.</P
+><P
+>A Paradox database is
+			represented by a pointer to <TT
+CLASS="LITERAL"
+>pxdoc_t</TT
+>. Such an object
+			can be created with <CODE
+CLASS="FUNCTION"
+>PX_new(3)</CODE
+> and destroyed
+			with <CODE
+CLASS="FUNCTION"
+>PX_delete(3)</CODE
+>. <CODE
+CLASS="FUNCTION"
+>PX_new(3)</CODE
+> 
+			returns a pointer to <TT
+CLASS="LITERAL"
+>pxdoc_t</TT
+>. You can easily handle
+			several documents at the same time, each represented by its own
+			pointer to <TT
+CLASS="LITERAL"
+>pxdoc_t</TT
+>.</P
+><P
+><TT
+CLASS="LITERAL"
+>pxdoc_t</TT
+> is a faily large structure with various
+		  information about the paradox file. Most of the needed information is
+			stored in a substructure called <TT
+CLASS="LITERAL"
+>px_head</TT
+>.
+			<TT
+CLASS="LITERAL"
+>px_head</TT
+> is defined as the following:</P
+><PRE
+CLASS="PROGRAMLISTING"
+>typedef struct px_head pxhead_t;
+struct px_head {
+  char *px_tablename;
+  int px_recordsize;
+  char px_filetype;
+  int px_fileversion;
+  int px_numrecords;
+  int px_theonumrecords;
+  int px_numfields;
+  int px_maxtablesize;
+  int px_headersize;
+  int px_fileblocks;
+  int px_firstblock;
+  int px_lastblock;
+  int px_indexfieldnumber;
+  int px_indexroot;
+  int px_numindexlevels;
+  int px_writeprotected;
+  int px_doscodepage;
+  int px_primarykeyfields;
+  char px_modifiedflags1;
+  char px_modifiedflags2;
+  char px_sortorder;
+  int px_autoinc;
+  int px_fileupdatetime;
+  char px_refintegrity;
+  struct px_field *px_fields;
+};
+	  </PRE
+><P
+>The following example will do the basic
+			preparation without creating nor opening a document on the disk.</P
+><PRE
+CLASS="PROGRAMLISTING"
+>...
+#include &lt;paradox.h&gt;
+
+main(int argc, char *argv[]) {
+	pxdoc_t *pxdoc;
+
+	PX_boot();
+	pxdoc = PX_new();
+	PX_delete(pxdoc);
+	PX_shutdown();
+}
+	  </PRE
+><P
+>In order to actually read a Paradox database from disk you will
+		  have to call</P
+><DIV
+CLASS="FUNCSYNOPSIS"
+><P
+></P
+><A
+NAME="AEN44"
+></A
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>int PX_open_file</CODE
+>(pxdoc_t *pxdoc, const char *filename);</CODE
+></P
+><P
+></P
+></DIV
+><P
+>or</P
+><DIV
+CLASS="FUNCSYNOPSIS"
+><P
+></P
+><A
+NAME="AEN53"
+></A
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>int PX_open_fp</CODE
+>(pxdoc_t *pxdoc, FILE *fp);</CODE
+></P
+><P
+></P
+></DIV
+><P
+><CODE
+CLASS="FUNCTION"
+>PX_open_file(3)</CODE
+> will open an existing file
+		  with the given file name, while <CODE
+CLASS="FUNCTION"
+>PX_open_fp(3)</CODE
+>
+			will use an already open file. Both require a pointer to
+			<TT
+CLASS="LITERAL"
+>pxdoc_t</TT
+>.</P
+><P
+>Extending the previous example with one of the former two functions
+		  to open a database is just another small step as illustrated in the
+			next example.</P
+><PRE
+CLASS="PROGRAMLISTING"
+>...
+#include &lt;paradox.h&gt;
+
+main(int argc, char *argv[]) {
+	pxdoc_t *pxdoc;
+
+	PX_boot();
+	pxdoc = PS_new();
+	PX_open_file(pxdoc, "test.db");
+	PX_close(pxdoc);
+	PX_delete(pxdoc);
+	PX_shutdown();
+}
+	  </PRE
+><P
+>The database has to be closed with <CODE
+CLASS="FUNCTION"
+>PX_close(3)</CODE
+>.
+			<CODE
+CLASS="FUNCTION"
+>PX_close(3)</CODE
+> will only close the file if it
+			was opened by <CODE
+CLASS="FUNCTION"
+>PX_open_file(3)</CODE
+>.
+			</P
+><P
+>There are more sophisticated functions to open a Paradox database.
+		  They are used when error handling and memory management
+			shall be controlled by the calling application. Check the manual pages
+			<CODE
+CLASS="FUNCTION"
+>PX_new2(3)</CODE
+> and <CODE
+CLASS="FUNCTION"
+>PX_new3(3)</CODE
+> for
+			a detailed description or read the section about memory management
+			and error handler below.</P
+><P
+>If you rather like to create a new Paradox database the above example
+		  must call</P
+><DIV
+CLASS="FUNCSYNOPSIS"
+><P
+></P
+><A
+NAME="AEN75"
+></A
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>int PX_create_file</CODE
+>(pxdoc_t *pxdoc, pxfield_t *fields, int numfields, const char *filename, int type);</CODE
+></P
+><P
+></P
+></DIV
+><P
+>instead of <CODE
+CLASS="FUNCTION"
+>PX_open_file(3)</CODE
+>. Creating a Paradox file
+			requires three further parameters to specify the database layout and the
+			file type, e.g. pxfFileTypNonIndexDB. The function can be used to create
+			both databases and primary index files. Secondary index files are not currently
+			supported. A database opened for reading cannot be written and vise versa.
+			This disadvantage may be removed in one of the next versions.
+			Each field of the database is described by a structure:</P
+><PRE
+CLASS="PROGRAMLISTING"
+>typedef struct px_field pxfield_t;
+struct px_field {
+  char *px_fname;
+  char px_ftype;
+  int px_flen;
+  int px_fdc;
+};
+	  </PRE
+><P
+>The memory for the field array must be allocated by the
+		  calling application using pxlibs' memory management functions,
+			but will be freed by pxlib. For a list of available file types see the
+			man page of <CODE
+CLASS="FUNCTION"
+>PX_create_fp(3)</CODE
+>.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN94"
+></A
+><H2
+>READING RECORDS FROM A DATABASE</H2
+><P
+>Data in a Paradox database is organized in records containing fields.
+		  This is much like in other formats, e.g. dBase or a relational database
+			system. Fields can be of 17 different data types as listed below.
+			Field values are stored in
+			sequencial order in a record. A complete record is read by one of the
+			functions
+		</P
+><DIV
+CLASS="FUNCSYNOPSIS"
+><P
+></P
+><A
+NAME="AEN97"
+></A
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>int PX_get_record</CODE
+>(pxdoc_t *pxdoc, int recno, char *data, int deleted);</CODE
+></P
+><P
+></P
+></DIV
+><P
+>or</P
+><DIV
+CLASS="FUNCSYNOPSIS"
+><P
+></P
+><A
+NAME="AEN110"
+></A
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>int PX_get_record2</CODE
+>(pxdoc_t *pxdoc, int recno, char *data, int deleted, pxdatablockinfo_t *pxdbinfo);</CODE
+></P
+><P
+></P
+></DIV
+><P
+>The second function returns additional data about the internal
+		  location
+			of the record within the file, which is mostly valueable for debuging.
+			Both functions need a record number starting at 0 for the first record
+			and a memory area large enough for the record. The size of that area
+			can be determined by the function <CODE
+CLASS="FUNCTION"
+>PX_get_value(3)</CODE
+>
+			when `recordsize' is passed as the value name. The record will read into
+			that piece of memory straight from the database file without
+			modifications.</P
+><P
+>			Once the record data has been read it can be accessed with a number of
+			different functions depending on the field type. The following
+			list contains the field type and the function needed to retrieve
+			the value.</P
+><P
+>		<P
+></P
+><DIV
+CLASS="VARIABLELIST"
+><DL
+><DT
+>pxfAlpha</DT
+><DD
+><P
+>			   <DIV
+CLASS="FUNCSYNOPSIS"
+><P
+></P
+><A
+NAME="AEN133"
+></A
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>int PX_get_data_alpha</CODE
+>(pxdoc_t *pxdoc, char *data, int len, char **value);</CODE
+></P
+><P
+></P
+></DIV
+>
+         </P
+><P
+>The field value will be automatically converted from the
+           encoding used in the database file to the encoding set by
+           <CODE
+CLASS="FUNCTION"
+>PX_set_parameter(3)</CODE
+> with parameter name
+           set to 'targetencoding`. The string will be null terminated.
+         </P
+><P
+>This function allocates memory for the field data which must
+           be freed by the application. The chunk of memory can be different
+					 from len when encoding involves conversion from a 1-byte to a
+					 2-byte character representaion. This is also the reason why the
+					 application cannot precisly allocate the memory for the data.
+			  </P
+></DD
+><DT
+>pxfDate</DT
+><DD
+><P
+>			   <DIV
+CLASS="FUNCSYNOPSIS"
+><P
+></P
+><A
+NAME="AEN152"
+></A
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>int PX_get_data_long</CODE
+>(pxdoc_t *pxdoc, char *data, int len, long *value);</CODE
+></P
+><P
+></P
+></DIV
+>
+			 </P
+><P
+>Fields of type date are actually 4 byte interger values counting
+			   days since jan-00-0000. In order to convert it into 3 single integers
+				 for year, month and
+				 day, you will have to add 1721425 to the value and call the function
+			 </P
+><P
+>			   <DIV
+CLASS="FUNCSYNOPSIS"
+><P
+></P
+><A
+NAME="AEN166"
+></A
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>void PX_SdnToGregorian</CODE
+>(long int *value, int *year, int *month, int *day);</CODE
+></P
+><P
+></P
+></DIV
+>
+			 </P
+><P
+>			   in order to get a valid date. The value 1721425 is the number of days
+				 between the start of the julian calendar (4714 BC) and jan-00-0000.
+			 </P
+></DD
+><DT
+>pxfShort</DT
+><DD
+><P
+>			   <DIV
+CLASS="FUNCSYNOPSIS"
+><P
+></P
+><A
+NAME="AEN183"
+></A
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>int PX_get_data_short</CODE
+>(pxdoc_t *pxdoc, char *data, int len, short int *value);</CODE
+></P
+><P
+></P
+></DIV
+>
+			   </P
+></DD
+><DT
+>pxfLong, pxfAutoInc</DT
+><DD
+><P
+>			   <DIV
+CLASS="FUNCSYNOPSIS"
+><P
+></P
+><A
+NAME="AEN199"
+></A
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>int PX_get_data_long</CODE
+>(pxdoc_t *pxdoc, char *data, int len, long *value);</CODE
+></P
+><P
+></P
+></DIV
+>
+			 </P
+></DD
+><DT
+>pxfNumber, pxfCurrency</DT
+><DD
+><P
+>			   <DIV
+CLASS="FUNCSYNOPSIS"
+><P
+></P
+><A
+NAME="AEN215"
+></A
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>int PX_get_data_double</CODE
+>(pxdoc_t *pxdoc, char *data, int len, double *value);</CODE
+></P
+><P
+></P
+></DIV
+>
+			 </P
+></DD
+><DT
+>pxfLogical</DT
+><DD
+><P
+>				 <DIV
+CLASS="FUNCSYNOPSIS"
+><P
+></P
+><A
+NAME="AEN231"
+></A
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>int PX_get_data_byte</CODE
+>(pxdoc_t *pxdoc, char *data, int len, char *value);</CODE
+></P
+><P
+></P
+></DIV
+>
+       </P
+><P
+>The extracted value is either 0 (false) or &#62;0 (true).
+			 </P
+></DD
+><DT
+>pxfBLOb, pxfMemoBLOb, pxfFmtMemoBLOb</DT
+><DD
+><P
+>				 <DIV
+CLASS="FUNCSYNOPSIS"
+><P
+></P
+><A
+NAME="AEN248"
+></A
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>int PX_get_data_blob</CODE
+>(pxdoc_t *pxdoc, char *data, int len, int *modnr, int *blobsize, char **value);</CODE
+></P
+><P
+></P
+></DIV
+>
+       </P
+><P
+>			   This function may not in any case succed. You should call
+				 <CODE
+CLASS="FUNCTION"
+>PX_set_blob_file(3)</CODE
+> before to make sure even
+				 blobs in a separate blob file can be retrieved. See the section
+				 about reading blobs for more information.
+			 </P
+></DD
+><DT
+>pxfOLE</DT
+><DD
+><P
+></P
+></DD
+><DT
+>pxfGraphic</DT
+><DD
+><P
+>				 <DIV
+CLASS="FUNCSYNOPSIS"
+><P
+></P
+><A
+NAME="AEN274"
+></A
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>int PX_get_data_graphic</CODE
+>(pxdoc_t *pxdoc, char *data, int len, int *modnr, int *blobsize, char **value);</CODE
+></P
+><P
+></P
+></DIV
+>
+       </P
+></DD
+><DT
+>pxfTime</DT
+><DD
+><P
+>Use <CODE
+CLASS="FUNCTION"
+>PX_get_data_long(3)</CODE
+> as documented
+			   at field type pxfDate. The value is the number of milli seconds since
+				 midnight.</P
+></DD
+><DT
+>pxfTimestamp</DT
+><DD
+><P
+>Use <CODE
+CLASS="FUNCTION"
+>PX_get_data_double(3)</CODE
+> and convert
+			   the timestamp into a string with</P
+><P
+>			   <DIV
+CLASS="FUNCSYNOPSIS"
+><P
+></P
+><A
+NAME="AEN301"
+></A
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>char *PX_timestamp2string</CODE
+>(pxdoc_t *pxdoc, double *value, const char *format);</CODE
+></P
+><P
+></P
+></DIV
+>
+			 </P
+><P
+><CODE
+CLASS="FUNCTION"
+>PX_timestamp2string(3)</CODE
+> takes a format string
+			   as described in the manual page of the function and returns a string.
+				 Alternatively you can process the value itself. It represents the
+				 number of seconds since jan-00-0000. Dividing it by 86400 and
+				 converting
+				 it to an integer produces a value as stored in fields of type pxfTime.
+			 </P
+></DD
+><DT
+>pxfBCD</DT
+><DD
+><P
+>			   <DIV
+CLASS="FUNCSYNOPSIS"
+><P
+></P
+><A
+NAME="AEN317"
+></A
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>int PX_get_data_bcd</CODE
+>(pxdoc_t *pxdoc, char *data, int len, char **value);</CODE
+></P
+><P
+></P
+></DIV
+>
+         </P
+><P
+>This function allocates memory for the field data which must
+           be freed by the application.
+         </P
+></DD
+><DT
+>pxfBytes</DT
+><DD
+><P
+>			   <DIV
+CLASS="FUNCSYNOPSIS"
+><P
+></P
+><A
+NAME="AEN334"
+></A
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>int PX_get_data_bytes</CODE
+>(pxdoc_t *pxdoc, char *data, int len, char **value);</CODE
+></P
+><P
+></P
+></DIV
+>
+         </P
+><P
+>This function behaves like
+           <CODE
+CLASS="FUNCTION"
+>PX_get_data_alpha(3)</CODE
+> except for the character
+           conversion which does not take place. It will always copy
+           exactely <CODE
+CLASS="PARAMETER"
+>len</CODE
+> bytes. This function
+					 allocates memory for the field data which must be freed by
+					 the application.
+         </P
+></DD
+></DL
+></DIV
+>
+	  </P
+><P
+>Each function takes the current Paradox database object as the first
+			argument.  The second argument is the start of the field data. For the
+			first field this will be the beginning of the whole record. The second
+			field starts at an offset of length(first field), the third field starts
+			at length(first field) plus length(second field) and so on. The
+			<CODE
+CLASS="PARAMETER"
+>len</CODE
+> is the size of the field. The last parameter
+			is a pointer to the data converted to an equivalent C type. Each function either
+      returns 0 on success or a value &lt; 0 in case of an error. Nobody prevents
+      you from
+			accessing the data with the wrong function, or pointing towards the wrong
+			position in the record. Check the manual page of each function for a more
+      detailed description.</P
+><P
+>Sequencialy reading records and fields from a
+			Paradox database is illustrated in the next simplified example.</P
+><PRE
+CLASS="PROGRAMLISTING"
+>for(j=0; j&lt;pxh-&gt;px_numrecords; j++) {
+  int offset;
+  if(PX_get_record(pxdoc, j, data)) {
+    offset = 0;
+    pxf = pxh-&gt;px_fields;
+    for(i=0; i&lt;pxh-&gt;px_numfields; i++) {
+      switch(pxf-&gt;px_ftype) {
+        case pxfAlpha: {
+          char *value;
+          if(0 &lt; PX_get_data_alpha(pxdoc, &amp;data[offset], pxf-&gt;px_flen, &amp;value)) {
+            // ...
+            pxdoc-&gt;free(pxdoc, value);
+          } else {
+            // ...
+          }
+          break;
+        }
+        case pxfDate: {
+          long value;
+          int year, month, day;
+          if(0 &lt; PX_get_data_long(pxdoc, &amp;data[offset], pxf-&gt;px_flen, &amp;value)) {
+            PX_SdnToGregorian(value+1721425, &amp;year, &amp;month, &amp;day);
+            // ...
+          } else {
+            // ...
+          }
+          break;
+        }
+        case pxfShort: {
+          short int value;
+          if(0 &lt; PX_get_data_short(pxdoc, &amp;data[offset], pxf-&gt;px_flen, &amp;value)) {
+            // ...
+          } else {
+            // ...
+          }
+          break;
+        }
+        case pxfAutoInc:
+        case pxfLong: {
+          long value;
+          if(0 &lt; PX_get_data_long(pxdoc, &amp;data[offset], pxf-&gt;px_flen, &amp;value)) {
+            // ...
+          } else {
+            // ...
+          }
+          break;
+        }
+        case pxfTimestamp: {
+          double value;
+          if(0 &lt; PX_get_data_double(pxdoc, &amp;data[offset], pxf-&gt;px_flen, &amp;value)) {
+            char *str = PX_timestamp2string(pxdoc, value, "Y-m-d H:i:s");
+            // ...
+            pxdoc-&gt;free(pxdoc, str);
+          } else {
+            // ...
+          }
+          break;
+        }
+        case pxfTime: {
+          long value;
+          if(0 &lt; PX_get_data_long(pxdoc, &amp;data[offset], pxf-&gt;px_flen, &amp;value)) {
+            // ...
+          } else {
+            // ...
+          }
+          break;
+        }
+        case pxfCurrency:
+        case pxfNumber: {
+          double value;
+          if(0 &lt; PX_get_data_double(pxdoc, &amp;data[offset], pxf-&gt;px_flen, &amp;value)) {
+            // ...
+          } else {
+            // ...
+          }
+          break;
+        }
+        case pxfLogical: {
+          char value;
+          if(0 &lt; PX_get_data_byte(pxdoc, &amp;data[offset], pxf-&gt;px_flen, &amp;value)) {
+            if(value)
+              // ...
+            else
+              // ...
+          } else {
+            // ...
+          }
+          break;
+        }
+        case pxfBLOb:
+        case pxfGraphic:
+        case pxfOLE:
+        case pxfMemoBLOb:
+        case pxfFmtMemoBLOb: {
+            char *blobdata;
+            int mod_nr, size, ret;
+            if(pxf-&gt;px_ftype == pxfGraphic)
+              ret = PX_get_data_graphic(pxdoc, &amp;data[offset], pxf-&gt;px_flen, &amp;mod_nr, &amp;size, &amp;blobdata);
+            else
+              ret = PX_get_data_blob(pxdoc, &amp;data[offset], pxf-&gt;px_flen, &amp;mod_nr, &amp;size, &amp;blobdata);
+            if(ret &gt; 0) {
+              if(blobdata) {
+                // ...
+                pxdoc-&gt;free(pxdoc, blobdata);
+              } else {
+                // ...
+              }
+            }
+            break;
+        }
+        case pxfBCD: {
+          char *value;
+          int ret;
+          if(0 &lt; (ret = PX_get_data_bcd(pxdoc, &amp;data[offset], pxf-&gt;px_fdc, &amp;value))) {
+            // ..
+            pxdoc-&gt;free(pxdoc, value);
+          } else if(ret == 0) {
+            // ..
+          } else {
+            // ..
+          }
+          break;
+        }
+        case pxfBytes:
+          // ..
+          break;
+        default:
+          break;
+      }
+    }
+    offset += pxf-&gt;px_flen;
+    pxf++;
+  } else {
+    fprintf(stderr, _("Couldn't get record number %d\n"), j);
+  }
+}
+	  </PRE
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN353"
+></A
+><H2
+>WRITING RECORDS INTO A DATABASE</H2
+><P
+>Write support has been introduced into pxlib in version 0.1.9 but
+		  should be still considered experimental, though there has been reports
+			from users who has successfully used it.</P
+><P
+>Writing paradox databases is
+			quite similar to reading them, if you substitute
+			<CODE
+CLASS="FUNCTION"
+>PX_open_file(3)</CODE
+> by
+			<CODE
+CLASS="FUNCTION"
+>PX_create_file(3)</CODE
+> and
+			<CODE
+CLASS="FUNCTION"
+>PX_get_record(3)</CODE
+> by
+			<CODE
+CLASS="FUNCTION"
+>PX_put_record(3)</CODE
+>.</P
+><P
+>Modifying the above example in order to create a simple database
+		  with two columns will result in the following code:
+		</P
+><PRE
+CLASS="PROGRAMLISTING"
+>...
+#include &lt;paradox.h&gt;
+
+main(int argc, char *argv[]) {
+	pxdoc_t *pxdoc;
+	pxfield_t pxf[2];
+	int numfields = 2;
+
+	PX_boot();
+	pxdoc = PS_new();
+	pxf[0].px_fname = PX_strdup(pxdoc, "column1");
+	pxf[0].px_ftype = pxfShort;
+	pxf[0].px_flen = 2;
+	pxf[0].px_fdc = 0;
+	pxf[1].px_fname = PX_strdup(pxdoc, "column2");
+	pxf[1].px_ftype = pxfAlpha;
+	pxf[1].px_flen = 20;
+	pxf[1].px_fdc = 0;
+	PX_create_file(pxdoc, pxf, numfields, "test.db", pxfFileTypNonIndexDB);
+	PX_close(pxdoc);
+	PX_delete(pxdoc);
+	PX_shutdown();
+}
+	  </PRE
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN363"
+></A
+><H2
+>ENCODING</H2
+><P
+>Exchanging text is not problem as long as both parties use the same
+		  encoding or stipulate to use plain 7 bit ascii. Paradox allows to use
+			any encoding with a know dos code page and saves the corresponding
+			code page number in the
+			header of the database. You can request this number with
+			<CODE
+CLASS="FUNCTION"
+>PX_get_value(3)</CODE
+> by passing `codepage' as the value
+			name. Reading fields of type <TT
+CLASS="LITERAL"
+>pxfAlpha</TT
+> will return
+			the unmodified value unless the target encoding has been set by
+			<CODE
+CLASS="FUNCTION"
+>PX_set_paramter(3)</CODE
+> differently
+			from the one stored in the database header. If the target encoding
+			is set differently <CODE
+CLASS="FUNCTION"
+>PX_get_data_alpha(3)</CODE
+> will
+			automatically convert into the requested encoding. This is either
+			done be the iconv or recode library, depending on which one was
+			found when pxlib was configured. If both were available iconv
+			is preferred.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN370"
+></A
+><H2
+>READING BLOBS</H2
+><P
+>Paradox knows five field types which all represent a type of blob data.
+		  Blobs can be stored in the database file but are usually stored in an extra
+			file with the extension <TT
+CLASS="LITERAL"
+>.MB</TT
+>. pxlib provides two functions
+			to read blob data.</P
+><P
+>		  <DIV
+CLASS="FUNCSYNOPSIS"
+><P
+></P
+><A
+NAME="AEN375"
+></A
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>int PX_get_data_blob</CODE
+>(pxdoc_t *pxdoc, char *data, int len, int *modnr, int *blobsize, char **value);</CODE
+></P
+><P
+></P
+></DIV
+>
+    </P
+><P
+>and</P
+><P
+>		 <DIV
+CLASS="FUNCSYNOPSIS"
+><P
+></P
+><A
+NAME="AEN393"
+></A
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>int PX_get_data_graphic</CODE
+>(pxdoc_t *pxdoc, char *data, int len, int *modnr, int *blobsize, char **value);</CODE
+></P
+><P
+></P
+></DIV
+>
+		</P
+><P
+>The second function must be used for fields of type
+		  <TT
+CLASS="LITERAL"
+>pxfGraphic</TT
+>, the first function can be savely
+			use for fields of type <TT
+CLASS="LITERAL"
+>pxfBLOb</TT
+>,
+			<TT
+CLASS="LITERAL"
+>pxfMemoBLOb</TT
+>, and <TT
+CLASS="LITERAL"
+>pxfFmtMemoBLOb</TT
+>.
+		</P
+><P
+>In order to read blob data from a .MB file one must first associate
+		  that file with the database file by calling</P
+><P
+>		  <DIV
+CLASS="FUNCSYNOPSIS"
+><P
+></P
+><A
+NAME="AEN416"
+></A
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>int PX_set_blob_file</CODE
+>(pxdoc_t *pxdoc, const char *filename);</CODE
+></P
+><P
+></P
+></DIV
+>
+		</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN424"
+></A
+><H2
+>WRITING BLOBS</H2
+><P
+>Writing blobs is still the most experimental part of pxlib. There
+		  has been already success stories but there are also some missing parts
+			in the paradox file format which decreases confidence on those files.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN427"
+></A
+><H2
+>MEMORY MANAGEMENT, ERROR HANDLING</H2
+><P
+>pxlib uses by default its on memory management and error handling
+		  functions. In many cases the calling application has its own memory
+			management and error handling. pxlib can be told to use those
+			functions by calling <CODE
+CLASS="FUNCTION"
+>PX_new3(3)</CODE
+> instead of
+			<CODE
+CLASS="FUNCTION"
+>PX_new(3)</CODE
+>.</P
+><DIV
+CLASS="FUNCSYNOPSIS"
+><P
+></P
+><A
+NAME="AEN432"
+></A
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>int PX_new3</CODE
+>(pxdoc_t *psdoc, (errorhandler *) (pxdoc_t *p, int type, const char *msg, void *data), (allocproc *) (pxdoc_t *p, size_t size, const char *caller), (reallocproc *) (pxdoc_t *p, void *mem, size_t size, const char *caller), (freeproc *) (pxdoc_t *p, void *mem), void *errorhandler_user_data);</CODE
+></P
+><P
+></P
+></DIV
+><P
+>The errorhandler and the last parameter
+			<CODE
+CLASS="PARAMETER"
+>errorhandler_user_data</CODE
+> allow to pass arbitrary
+			data as the last parameter to its own errorhandler. This is quite often
+			used if errors are being output in a widget of a graphical toolkit. The
+			pointer to that widget can be passed as
+			<CODE
+CLASS="PARAMETER"
+>errorhandler_user_data</CODE
+> and pxlib will pass it
+			forward to the error handler.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN451"
+></A
+><H2
+>DOCUMENT INFORMATION</H2
+><P
+>PostScript documents usually contain a header made of comments
+		  with information about the document. The printer usually disregards
+			this information but many PostScript viewer use it. Besides that,
+			one can also place pdfmarks into the PostScript document which contain
+			the title, keywords, author and other information. pslib provides the
+			function <CODE
+CLASS="FUNCTION"
+>PS_set_info(3)</CODE
+> to set those fields.</P
+><DIV
+CLASS="FUNCSYNOPSIS"
+><P
+></P
+><A
+NAME="AEN455"
+></A
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>int PS_set_info</CODE
+>(pxdoc_t *psdoc, const char *key, const char *value);</CODE
+></P
+><P
+></P
+></DIV
+><P
+><CODE
+CLASS="FUNCTION"
+>PS_set_info(3)</CODE
+> must be called before the
+		  first page. Calling it later will have no effect and produces a warning.
+			The function may also be used to set the bounding box of the document.
+			Usually there is no need for it, because the dimension of the first
+			page will be used for the bounding box.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN467"
+></A
+><H2
+>SEE ALSO</H2
+><P
+>The detailed manual pages for each function of the library.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN470"
+></A
+><H2
+>AUTHOR</H2
+><P
+>This manual page was written by Uwe Steinmann <CODE
+CLASS="EMAIL"
+>&#60;<A
+HREF="mailto:uwe@steinmann.cx"
+>uwe@steinmann.cx</A
+>&#62;</CODE
+>.</P
+></DIV
+></BODY
+></HTML
+>

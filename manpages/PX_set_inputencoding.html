@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>PX_SET_INPUTENCODING</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"></HEAD
+><BODY
+CLASS="REFENTRY"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><H1
+><A
+NAME="AEN1"
+></A
+>PX_SET_INPUTENCODING</H1
+><DIV
+CLASS="REFNAMEDIV"
+><A
+NAME="AEN15"
+></A
+><H2
+>Name</H2
+>PX_set_inputencoding&nbsp;--&nbsp;Set encoding for output</DIV
+><DIV
+CLASS="REFSYNOPSISDIV"
+><A
+NAME="AEN18"
+></A
+><H2
+>Synopsis</H2
+><P
+>#include &lt;paradox.h&gt;</P
+><P
+>int PX_set_inputencoding(pxdoc_t *pxdoc, const char *encoding)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN21"
+></A
+><H2
+>DESCRIPTION</H2
+><P
+>Sets the input encoding for all alpha fields. It is used when
+		  data is stored into a record. The encoding must
+		  be a name as it is described by the man and info pages of
+			<SPAN
+CLASS="APPLICATION"
+>recode</SPAN
+> or <SPAN
+CLASS="APPLICATION"
+>iconv</SPAN
+>
+			whatever is used. A common value is `latin1' on Unix
+			systems. If you do not set the encoding the function PX_get_data_alpha(3)
+			will return field data in the original encoding otherwise it will
+			recode the field data.</P
+><P
+>This function is a short cut form PX_set_parameter(pxdoc,
+		  "inputencoding", encoding) and is deprecated.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN27"
+></A
+><H2
+>RETURN VALUE</H2
+><P
+>Returns -2 if recoding is not supported and a value &lt; 0 in case of
+		  an error, otherwise 0.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN30"
+></A
+><H2
+>SEE ALSO</H2
+><P
+>PX_set_data_alpha(3), PX_set_targetencoding(3), PX_set_parameter(3),
+		  iconv(1), recode(1)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN33"
+></A
+><H2
+>AUTHOR</H2
+><P
+>This manual page was written by Uwe Steinmann <CODE
+CLASS="EMAIL"
+>&#60;<A
+HREF="mailto:uwe@steinmann.cx"
+>uwe@steinmann.cx</A
+>&#62;</CODE
+>.</P
+></DIV
+></BODY
+></HTML
+>

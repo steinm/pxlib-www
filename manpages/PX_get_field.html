@@ -1,0 +1,232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>PX_GET_FIELD</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"></HEAD
+><BODY
+CLASS="REFENTRY"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><H1
+><A
+NAME="AEN1"
+></A
+>PX_GET_FIELD</H1
+><DIV
+CLASS="REFNAMEDIV"
+><A
+NAME="AEN15"
+></A
+><H2
+>Name</H2
+>PX_get_field&nbsp;--&nbsp;Returns single field definition in Paradox file</DIV
+><DIV
+CLASS="REFSYNOPSISDIV"
+><A
+NAME="AEN18"
+></A
+><H2
+>Synopsis</H2
+><P
+>#include &lt;paradox.h&gt;</P
+><P
+>pxfield_t *PX_get_field(pxdoc_t *pxdoc, int fieldno)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN21"
+></A
+><H2
+>DESCRIPTION</H2
+><P
+>Returns the meta data of the field with the given number in a
+		  Paradox file. The first field has number 0, the last one has
+			number_of_fields-1. pxfield_t is defined as</P
+><PRE
+CLASS="PROGRAMLISTING"
+>		  typedef struct px_field pxfield_t;
+			struct px_field {
+			  char *px_fname;
+			  char px_ftype;
+			  int px_flen;
+			  int px_fdc;
+			};
+		</PRE
+><P
+>The meaning of px_ftype is as following:</P
+><P
+>		 <DIV
+CLASS="TABLE"
+><A
+NAME="AEN27"
+></A
+><P
+><B
+>Table 1. Values and meaning of px_ftype</B
+></P
+><TABLE
+BORDER="1"
+CLASS="CALSTABLE"
+><COL><COL><THEAD
+><TR
+><TH
+>Value</TH
+><TH
+>Meaning</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+>pxfAlpha</TD
+><TD
+>Character string with a maximum of px_flen charackters.</TD
+></TR
+><TR
+><TD
+>pxfDate</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+>pxfShort</TD
+><TD
+>Short interger (16 Bit)</TD
+></TR
+><TR
+><TD
+>pxfLong</TD
+><TD
+>Long Integer (32 Bit)</TD
+></TR
+><TR
+><TD
+>pxfCurrency</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+>pxfNumber</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+>pxfLogical</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+>pxfMemoBLOb</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+>pxfBLOb</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+>pxfFmtMemoBLOb</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+>pxfOLE</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+>pxfGraphic</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+>pxfTime</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+>pxfTimestamp</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+>pxfAutoInc</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+>pxfBCD</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+>pxfBytes</TD
+><TD
+>Array of bytes.</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+>
+	  </P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN86"
+></A
+><H2
+>RETURN VALUE</H2
+><P
+>Returns pointer to field on success and NULL on failure.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN89"
+></A
+><H2
+>SEE ALSO</H2
+><P
+>PX_get_record(3), PX_get_fields(3)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN92"
+></A
+><H2
+>AUTHOR</H2
+><P
+>This manual page was written by Uwe Steinmann <CODE
+CLASS="EMAIL"
+>&#60;<A
+HREF="mailto:uwe@steinmann.cx"
+>uwe@steinmann.cx</A
+>&#62;</CODE
+>.</P
+></DIV
+></BODY
+></HTML
+>

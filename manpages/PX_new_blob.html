@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>PX_NEW_BLOB</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"></HEAD
+><BODY
+CLASS="REFENTRY"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><H1
+><A
+NAME="AEN1"
+></A
+>PX_NEW_BLOB</H1
+><DIV
+CLASS="REFNAMEDIV"
+><A
+NAME="AEN15"
+></A
+><H2
+>Name</H2
+>PX_new_blob&nbsp;--&nbsp;Create new instance of Paradox blob file (deprecated)</DIV
+><DIV
+CLASS="REFSYNOPSISDIV"
+><A
+NAME="AEN18"
+></A
+><H2
+>Synopsis</H2
+><P
+>#include &lt;paradox.h&gt;</P
+><P
+>pxblob_t* PX_new_blob(pxdoc_t *pxdoc)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN21"
+></A
+><H2
+>DESCRIPTION</H2
+><P
+>Creates a new instance of a Paradox blob file, which is associated
+		  to the passed database file. This function
+		  must be called before accessing any blob file.</P
+><P
+>This function is deprecated. Use
+		  <CODE
+CLASS="FUNCTION"
+>PX_set_blob_file()</CODE
+>
+			and <CODE
+CLASS="FUNCTION"
+>PX_get_data_blob()</CODE
+>
+			or <CODE
+CLASS="FUNCTION"
+>PX_get_data_graphic</CODE
+> instead.
+		  </P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN28"
+></A
+><H2
+>RETURN VALUE</H2
+><P
+>Returns a pointer to an internal representation of a Paradox
+		  blob file or NULL on failure.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN31"
+></A
+><H2
+>SEE ALSO</H2
+><P
+>PX_open_blob_file(3), PX_open_blob_fp(3)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN34"
+></A
+><H2
+>AUTHOR</H2
+><P
+>This manual page was written by Uwe Steinmann <CODE
+CLASS="EMAIL"
+>&#60;<A
+HREF="mailto:uwe@steinmann.cx"
+>uwe@steinmann.cx</A
+>&#62;</CODE
+>.</P
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>PX_NEW3</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"></HEAD
+><BODY
+CLASS="REFENTRY"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><H1
+><A
+NAME="AEN1"
+></A
+>PX_NEW3</H1
+><DIV
+CLASS="REFNAMEDIV"
+><A
+NAME="AEN15"
+></A
+><H2
+>Name</H2
+>PX_new3&nbsp;--&nbsp;create new instance of Paradox file</DIV
+><DIV
+CLASS="REFSYNOPSISDIV"
+><A
+NAME="AEN18"
+></A
+><H2
+>Synopsis</H2
+><P
+>#include &lt;paradox.h&gt;</P
+><P
+>pxdoc_t* PX_new3(void  (*errorhandler)(pxdoc_t *p, int type, const char *msg, void *para), void* (*allocproc)(pxdoc_t *p, size_t size, const char *caller), void* (*reallocproc)(pxdoc_t *p, void *mem, size_t size, const char *caller), void  (*freeproc)(pxdoc_t *p, void *mem), void *errorhandler_user_data)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN21"
+></A
+><H2
+>DESCRIPTION</H2
+><P
+>Creates a new instance of a Paradox file. This function, PX_new(3)
+		  or PX_new2(3)
+		  must be called before any other functions. If the caller has its own
+			error and memory management functions they can be passed.</P
+><P
+>In opposition to PX_new2(3) this function has an extra parameter
+		  <CODE
+CLASS="OPTION"
+>errorhandler_user_data</CODE
+> which is a pointer to
+			user data which is passed to the error handler function as the
+			fourth parameter. This could be used to pass e.g. a widget pointer
+			where error message are to be output, or a context which otherwise had
+			to passed to the error handler through a global variable.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN26"
+></A
+><H2
+>RETURN VALUE</H2
+><P
+>Returns a pointer to an internal representation of a Paradox file or
+		  NULL on failure.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN29"
+></A
+><H2
+>SEE ALSO</H2
+><P
+>PX_new(3), PX_new2(3), PX_open_file(3), PX_open_fp(3)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN32"
+></A
+><H2
+>AUTHOR</H2
+><P
+>This manual page was written by Uwe Steinmann <CODE
+CLASS="EMAIL"
+>&#60;<A
+HREF="mailto:uwe@steinmann.cx"
+>uwe@steinmann.cx</A
+>&#62;</CODE
+>.</P
+></DIV
+></BODY
+></HTML
+>

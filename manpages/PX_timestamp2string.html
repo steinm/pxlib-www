@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>PX_TIMESTAMP2STRING</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"></HEAD
+><BODY
+CLASS="REFENTRY"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><H1
+><A
+NAME="AEN1"
+></A
+>PX_TIMESTAMP2STRING</H1
+><DIV
+CLASS="REFNAMEDIV"
+><A
+NAME="AEN15"
+></A
+><H2
+>Name</H2
+>PX_timestamp2string&nbsp;--&nbsp;duplicate a string</DIV
+><DIV
+CLASS="REFSYNOPSISDIV"
+><A
+NAME="AEN18"
+></A
+><H2
+>Synopsis</H2
+><P
+>#include &lt;paradox.h&gt;</P
+><P
+>char * PX_timestamp2string(pxdoc_t *pxdoc, double timestamp, const char *format)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN21"
+></A
+><H2
+>DESCRIPTION</H2
+><P
+>Creates a string representation of a paradox timestamp as specified
+		  in the parameter <CODE
+CLASS="PARAMETER"
+>format</CODE
+>.
+		  The timestamp must be retrieved with PX_get_data_double(3). A timestamp
+			contains both time and date information. The format string contains chars
+			which stand for certain values of the date/time. The following table lists
+			all available characters with a meaning. All other characters are being
+			copied unmodified to the output string. If a special character shall not
+			be interpreted it must be preceded with a backslash.</P
+><P
+>		 <DIV
+CLASS="TABLE"
+><A
+NAME="AEN26"
+></A
+><P
+><B
+>Table 1. Characters and their meaning in date/time format string</B
+></P
+><TABLE
+BORDER="1"
+CLASS="CALSTABLE"
+><COL><COL><THEAD
+><TR
+><TH
+>Character</TH
+><TH
+>Meaning</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+>Y</TD
+><TD
+>year, numeric, 4 digits</TD
+></TR
+><TR
+><TD
+>y</TD
+><TD
+>year, numeric, 2 digits</TD
+></TR
+><TR
+><TD
+>m</TD
+><TD
+>month, numeric</TD
+></TR
+><TR
+><TD
+>n</TD
+><TD
+>month, numeric, no leading zeroes</TD
+></TR
+><TR
+><TD
+>d</TD
+><TD
+>day of the month, numeric</TD
+></TR
+><TR
+><TD
+>j</TD
+><TD
+>day of the month, numeric, no leading zeros</TD
+></TR
+><TR
+><TD
+>H</TD
+><TD
+>hour, numeric, 24 hour format</TD
+></TR
+><TR
+><TD
+>h</TD
+><TD
+>hour, numeric, 12 hour format</TD
+></TR
+><TR
+><TD
+>G</TD
+><TD
+>hour, numeric, 24 hour format, no leading zeroes</TD
+></TR
+><TR
+><TD
+>g</TD
+><TD
+>hour, numeric, 12 hour format, no leading zeroes</TD
+></TR
+><TR
+><TD
+>i</TD
+><TD
+>minutes, numeric</TD
+></TR
+><TR
+><TD
+>s</TD
+><TD
+>seconds, numeric</TD
+></TR
+><TR
+><TD
+>A</TD
+><TD
+>AM/PM</TD
+></TR
+><TR
+><TD
+>a</TD
+><TD
+>am/pm</TD
+></TR
+><TR
+><TD
+>L</TD
+><TD
+>boolean for leap year</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+>
+	  </P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN79"
+></A
+><H2
+>RETURN VALUE</H2
+><P
+>Returns pointer to string on success and NULL on failure.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN82"
+></A
+><H2
+>SEE ALSO</H2
+><P
+>PX_new2(3)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN85"
+></A
+><H2
+>AUTHOR</H2
+><P
+>This manual page was written by Uwe Steinmann <CODE
+CLASS="EMAIL"
+>&#60;<A
+HREF="mailto:uwe@steinmann.cx"
+>uwe@steinmann.cx</A
+>&#62;</CODE
+>.</P
+></DIV
+></BODY
+></HTML
+>

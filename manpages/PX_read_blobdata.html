@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>PX_READ_BLOBDATA</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"></HEAD
+><BODY
+CLASS="REFENTRY"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><H1
+><A
+NAME="AEN1"
+></A
+>PX_READ_BLOBDATA</H1
+><DIV
+CLASS="REFNAMEDIV"
+><A
+NAME="AEN15"
+></A
+><H2
+>Name</H2
+>PX_read_blobdata&nbsp;--&nbsp;Read blob from file (deprecated)</DIV
+><DIV
+CLASS="REFSYNOPSISDIV"
+><A
+NAME="AEN18"
+></A
+><H2
+>Synopsis</H2
+><P
+>#include &lt;paradox.h&gt;</P
+><P
+>char* PX_read_blobdata(pxblob_t *pxblob, const char *data, int len, int *mod_nr, int *blobsize)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN21"
+></A
+><H2
+>DESCRIPTION</H2
+><P
+>Reads blob data from the given blob document (.MB file)
+	    passed as the
+		  first parameter. <CODE
+CLASS="OPTION"
+>data</CODE
+> is the data stored in the
+			blob field of the db file. <CODE
+CLASS="OPTION"
+>len</CODE
+> is the length
+			of that field. The function hides everything needed for evaluating
+			the field data. It can handle both single blob blocks and
+			suballocated blocks.
+			</P
+><P
+>This function is deprecated. Use
+		  <CODE
+CLASS="FUNCTION"
+>PX_set_blob_file(3)</CODE
+>
+			and <CODE
+CLASS="FUNCTION"
+>PX_get_data_blob(3)</CODE
+>
+			or <CODE
+CLASS="FUNCTION"
+>PX_get_data_graphic(3)</CODE
+> instead.
+		  </P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN30"
+></A
+><H2
+>RETURNS</H2
+><P
+>Returns NULL in case of an error or a pointer to the blob
+		  data. <CODE
+CLASS="OPTION"
+>mod_nr</CODE
+> contains the modification number of
+			the blob and <CODE
+CLASS="OPTION"
+>blobsize</CODE
+> contains the length of
+			the blob data. The modification number can be used as a unique
+			id for the blob.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN35"
+></A
+><H2
+>AUTHOR</H2
+><P
+>This manual page was written by Uwe Steinmann <CODE
+CLASS="EMAIL"
+>&#60;<A
+HREF="mailto:uwe@steinmann.cx"
+>uwe@steinmann.cx</A
+>&#62;</CODE
+>.</P
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>PX_SET_BLOB_FILE</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"></HEAD
+><BODY
+CLASS="REFENTRY"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><H1
+><A
+NAME="AEN1"
+></A
+>PX_SET_BLOB_FILE</H1
+><DIV
+CLASS="REFNAMEDIV"
+><A
+NAME="AEN15"
+></A
+><H2
+>Name</H2
+>PX_set_blob_file&nbsp;--&nbsp;Associate blob file with database</DIV
+><DIV
+CLASS="REFSYNOPSISDIV"
+><A
+NAME="AEN18"
+></A
+><H2
+>Synopsis</H2
+><P
+>#include &lt;paradox.h&gt;</P
+><P
+>int PX_set_blob_file(pxdoc_t *pxdoc, const char *filename)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN21"
+></A
+><H2
+>DESCRIPTION</H2
+><P
+>Opens or creates the given blob file and associates it with the Paradox
+		  database. This function must be called before accessing records
+			whose blob data is stored in a .MB file. It must also be called after
+			opening or creating the paradox database. If the blob data is contained
+			in the record itself or can be stored in the record, this function may
+			not be called.
+			</P
+><P
+>This function must be called after opening or creating the database
+		  file, because it uses the same file open mode. If you call it before
+			<CODE
+CLASS="FUNCTION"
+>PX_open_file(3)</CODE
+> or <CODE
+CLASS="FUNCTION"
+>PX_create_file(3)</CODE
+>
+			it will quit with an error.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN27"
+></A
+><H2
+>RETURN VALUE</H2
+><P
+>Returns a value &lt; 0 in case of an error, otherwise 0.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN30"
+></A
+><H2
+>SEE ALSO</H2
+><P
+>PX_open_file(3), PX_create_file(3)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN33"
+></A
+><H2
+>AUTHOR</H2
+><P
+>This manual page was written by Uwe Steinmann <CODE
+CLASS="EMAIL"
+>&#60;<A
+HREF="mailto:uwe@steinmann.cx"
+>uwe@steinmann.cx</A
+>&#62;</CODE
+>.</P
+></DIV
+></BODY
+></HTML
+>

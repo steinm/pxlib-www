@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>PX_CREATE_FP</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"></HEAD
+><BODY
+CLASS="REFENTRY"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><H1
+><A
+NAME="AEN1"
+></A
+>PX_CREATE_FP</H1
+><DIV
+CLASS="REFNAMEDIV"
+><A
+NAME="AEN15"
+></A
+><H2
+>Name</H2
+>PX_create_fp&nbsp;--&nbsp;create a new Paradox file</DIV
+><DIV
+CLASS="REFSYNOPSISDIV"
+><A
+NAME="AEN18"
+></A
+><H2
+>Synopsis</H2
+><P
+>#include &lt;paradox.h&gt;</P
+><P
+>int PX_create_fp(pxdoc_t *pxdoc, pxfield_t *fields, int numfields, FILE *fp, int type)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN21"
+></A
+><H2
+>DESCRIPTION</H2
+><P
+>Creates a new Paradox document in an already open file with the given
+		  field specification. <CODE
+CLASS="OPTION"
+>pxdoc</CODE
+> must be created before
+			with PX_new(3) or PX_new2(3). The file must be opened in read/write mode
+			(w+) with fopen(3). <CODE
+CLASS="OPTION"
+>fields</CODE
+> is an array
+			of <CODE
+CLASS="OPTION"
+>numfields</CODE
+> field specifications to set the
+			schema of the database. The memory for the field specifications and
+			field names must be allocated by the caller and may not be freed, since
+			the memory is freed when the document is deleted. Make sure to use the
+			same memory allocation function as passed to
+			<CODE
+CLASS="FUNCTION"
+>PX_new(3)</CODE
+>. The memory for the field names is
+			usually allocated with <CODE
+CLASS="FUNCTION"
+>PX_strdup(3)</CODE
+>.
+			The field name can be
+			left empty if a primary index file is to be created. The type of the
+			file can be set in the last parameter. Currently only database
+			(pxfFileTypIndexDB, pxfFileTypNonIndexDB)
+			primary index (pxfFileTypPrimIndex) files are supported.</P
+><P
+>After creating the paradox database you may want to call
+		  PX_set_tablename(3) in order to set the table name as it is stored
+			in the header of the database.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN30"
+></A
+><H2
+>RETURN VALUE</H2
+><P
+>Returns 0 on success and -1 on failure.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN33"
+></A
+><H2
+>SEE ALSO</H2
+><P
+>PX_new2(3), PX_new(3), PX_create_file(3), PX_set_tablename(3)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN36"
+></A
+><H2
+>AUTHOR</H2
+><P
+>This manual page was written by Uwe Steinmann <CODE
+CLASS="EMAIL"
+>&#60;<A
+HREF="mailto:uwe@steinmann.cx"
+>uwe@steinmann.cx</A
+>&#62;</CODE
+>.</P
+></DIV
+></BODY
+></HTML
+>

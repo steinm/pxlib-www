@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>PX_GET_DATA_BCD</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"></HEAD
+><BODY
+CLASS="REFENTRY"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><H1
+><A
+NAME="AEN1"
+></A
+>PX_GET_DATA_BCD</H1
+><DIV
+CLASS="REFNAMEDIV"
+><A
+NAME="AEN15"
+></A
+><H2
+>Name</H2
+>PX_get_data_bcd&nbsp;--&nbsp;Get bcd data field</DIV
+><DIV
+CLASS="REFSYNOPSISDIV"
+><A
+NAME="AEN18"
+></A
+><H2
+>Synopsis</H2
+><P
+>#include &lt;paradox.h&gt;</P
+><P
+>int PX_get_data_bcd(pxdoc_t *pxdoc, char *data, int len, char **value)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN21"
+></A
+><H2
+>DESCRIPTION</H2
+><P
+>Converts a data field as it stored in the database file into
+		  a bcd string. The string will not be longer than 20 chars including
+			the final 0. It contains only the characters `+', `-', `0-9', and `.'.
+			You should use this function
+			instead of accessing the data directly.</P
+><P
+><CODE
+CLASS="OPTION"
+>data</CODE
+> points to the start of the data field in the
+		  record. It must be calculated by summing up all field length before
+			the field to operate on and add it to the base pointer of the
+			record. <CODE
+CLASS="OPTION"
+>len</CODE
+> is the number of digits after the decimal
+			point.</P
+><P
+>The function allocates memory for the string returned in
+		  <CODE
+CLASS="OPTION"
+>*value</CODE
+>. This memory has to be freed by the application.
+			</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN29"
+></A
+><H2
+>RETURN VALUE</H2
+><P
+>Returns 0 if the value is NULL, -1 in case of an error and 1
+		  otherwise.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN32"
+></A
+><H2
+>SEE ALSO</H2
+><P
+>PX_get_data_alpha(3), PX_get_data_byte(3), PX_get_data_long(3), PX_get_data_short(3), PX_get_data_double(3)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN35"
+></A
+><H2
+>AUTHOR</H2
+><P
+>This manual page was written by Uwe Steinmann <CODE
+CLASS="EMAIL"
+>&#60;<A
+HREF="mailto:uwe@steinmann.cx"
+>uwe@steinmann.cx</A
+>&#62;</CODE
+>.</P
+></DIV
+></BODY
+></HTML
+>
