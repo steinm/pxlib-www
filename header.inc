@@ -23,8 +23,8 @@
     <div id="header">
       <div class="superHeader">
         <span>Related Sites:</span>
-        <a href="http://www.oswd.org" title="The host of this design">OSWD</a> |
-        <a href="http://www.oswd.org/userinfo.phtml?user=haran" title="Other designs by haran">haran&rsquo;s Designs</a>
+        <a href="pxview/index.php" title="Program to read Paradox databases">pxview</a> |
+        <a href="http://www.oswd.org/userinfo.phtml?user=haran" title="Other designs by haran">Creator of web design</a>
       </div>
 
       <div class="midHeader">
@@ -36,10 +36,12 @@
         <br class="doNotDisplay doNotPrint" />
 
         <div class="headerLinks">
+<!--
           <span class="doNotDisplay">Tools:</span>
           <a href="./index2.html">view an alternative layout &laquo;</a>
           <span class="doNotDisplay">|</span>
           <a style="cursor: help;" title="Thanks to CSS, this page is already printer friendly!">printer-friendly version &laquo;</a>
+-->
         </div>
       </div>
 
