@@ -1,0 +1,200 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>PX2SQLITE</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"></HEAD
+><BODY
+CLASS="REFENTRY"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><H1
+><A
+NAME="AEN1"
+></A
+>PX2SQLITE</H1
+><DIV
+CLASS="REFNAMEDIV"
+><A
+NAME="AEN15"
+></A
+><H2
+>Name</H2
+>px2sqlite&nbsp;--&nbsp;Read Paradox file and dump the records into sqlite database</DIV
+><DIV
+CLASS="REFSYNOPSISDIV"
+><A
+NAME="AEN18"
+></A
+><H2
+>Synopsis</H2
+><P
+><B
+CLASS="COMMAND"
+>px2sqlite</B
+>  [<CODE
+CLASS="OPTION"
+>-h | --help <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>-i | --info <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>-o FILE | --output-file=FILE <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>-n FILE | --primary-index-file=FILE <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>-r ENCODING | --recode=ENCODING <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>--tablename=NAME <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>--delete-tablename <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>--skip-schema <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>--set-sql-type=SPEC <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>--empty-string-is-null <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [FILE ]</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN52"
+></A
+><H2
+>DESCRIPTION</H2
+><P
+>This manual page documents the
+      <B
+CLASS="COMMAND"
+>px2sqlite</B
+> command.</P
+><P
+>px2sqlite reads Paradox files and dumps each record into
+			a sqlite database. The sqlite database will be created if it does not
+			exists. If the table already exists it will only be deleted if the
+			option --delete-table is passed. The option -o is required because
+			the output cannot be written to stdout.
+			px2sqlite is equivalent to pxview(1) when called with
+			the option -q.
+      </P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN57"
+></A
+><H2
+>OPTIONS</H2
+><P
+>The program follows the usual <ACRONYM
+CLASS="ACRONYM"
+>GNU</ACRONYM
+> command line syntax,
+      with long options starting with two dashes (`-').  A summary of
+      options is included below.</P
+><P
+>For a detailed description of all options see the man page of
+		  pxview(1).</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN62"
+></A
+><H2
+>SEE ALSO</H2
+><P
+>pxview(1), pxwrite(1), recode(1), iconv(1)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN65"
+></A
+><H2
+>AUTHOR</H2
+><P
+>This manual page was written by Uwe Steinmann &lt;<CODE
+CLASS="EMAIL"
+>&#60;<A
+HREF="mailto:uwe@steinmann.cx"
+>uwe@steinmann.cx</A
+>&#62;</CODE
+>&gt;.
+      Permission is
+      granted to copy, distribute and/or modify this document under
+      the terms of the <ACRONYM
+CLASS="ACRONYM"
+>GNU</ACRONYM
+> Free Documentation
+      License, Version 1.1 or any later version published by the Free
+      Software Foundation; with no Invariant Sections, no Front-Cover
+      Texts and no Back-Cover Texts.</P
+></DIV
+></BODY
+></HTML
+>
