@@ -9,7 +9,7 @@ function output_manpage_content($funcname) {
 		$start = strpos($content, "<H1");
 		if($start !== false) {
 			$content = substr($content, $start, -16);
-			$pattern = "/([a-zA-Z_]*)\(([0-9])\)/";
+			$pattern = "/([a-zA-Z0-9_]*)\(([0-9])\)/";
 			$replacement = "<a href=\"documentation.php?manpage=\$1\">\$1(\$2)</a>";
 			$content = preg_replace($pattern, $replacement, $content);
 			echo $content."\n";
