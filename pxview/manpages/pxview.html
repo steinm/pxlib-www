@@ -1,0 +1,876 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>PXVIEW</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"></HEAD
+><BODY
+CLASS="REFENTRY"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><H1
+><A
+NAME="AEN1"
+></A
+>PXVIEW</H1
+><DIV
+CLASS="REFNAMEDIV"
+><A
+NAME="AEN15"
+></A
+><H2
+>Name</H2
+>pxview&nbsp;--&nbsp;Read Paradox file and show information or dump the records in different formats</DIV
+><DIV
+CLASS="REFSYNOPSISDIV"
+><A
+NAME="AEN18"
+></A
+><H2
+>Synopsis</H2
+><P
+><B
+CLASS="COMMAND"
+>pxview</B
+>  [<CODE
+CLASS="OPTION"
+>-h | --help <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>--verbose <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>-i | --info <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>-c | --csv <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>-s | --sql <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>-x | --html <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>-t | --schema <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>-v | --verbose <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>--mode=MODE <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>-o FILE | --output-file=FILE <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>-b FILE | --blobfile=FILE <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>-p PREFIX | --blobprefix=PREFIX <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>--blobextension=EXT <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>-n FILE | --primary-index-file=FILE <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>-r ENCODING | --recode=ENCODING <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>--separator=CHAR <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>--enclosure=CHAR <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>--fields=REGEX <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>--tablename=NAME <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>--delete-table <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>--skip-schema <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>--use-copy <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>--short-insert <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>--set-sql-type=SPEC <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>--empty-string-is-null <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>--output-deleted <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>--mark-deleted <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [FILE ]</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN103"
+></A
+><H2
+>DESCRIPTION</H2
+><P
+>This manual page documents the
+      <B
+CLASS="COMMAND"
+>pxview</B
+> command.</P
+><P
+>pxview reads Paradox files and prints information about
+		  the file or dumps the records to stdout or a file. pxview is mostly
+			applied on Paradox .DB files but can also be used to show
+			information about other Paradox files. It can also read associated
+			blob files (.MB) and write each blob into a separate file.
+      </P
+><P
+>pxview can be used to convert Paradox databases into spreadsheet
+		  readable CSV files (comma separated values) or SQL insert statements to
+			import the records into a relational database. The sql output is optimized
+			to be used with PostgreSQL.</P
+><P
+>The programm currently supports only a subset of possible field
+		  types.  These are strings, short and long integers, boolean, bcd, blobs
+			and decimal numbers.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN110"
+></A
+><H2
+>OPTIONS</H2
+><P
+>The program follows the usual <ACRONYM
+CLASS="ACRONYM"
+>GNU</ACRONYM
+> command line syntax,
+      with long options starting with two dashes (`-').  A summary of
+      options is included below.</P
+><P
+></P
+><DIV
+CLASS="VARIABLELIST"
+><DL
+><DT
+><CODE
+CLASS="OPTION"
+>-h</CODE
+>
+          <CODE
+CLASS="OPTION"
+>--help</CODE
+></DT
+><DD
+><P
+>Show summary of options.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>--version</CODE
+></DT
+><DD
+><P
+>Show version of program.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>-o</CODE
+>
+          <CODE
+CLASS="OPTION"
+>--output-file</CODE
+></DT
+><DD
+><P
+>All output except for usage information and error messages
+					 will be written to the given file instead of stdout.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>-i</CODE
+>
+          <CODE
+CLASS="OPTION"
+>--info</CODE
+></DT
+><DD
+><P
+>Show information about Paradox file. If no other output format
+					 is specified this will be the default.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>-t</CODE
+>
+          <CODE
+CLASS="OPTION"
+>--schema</CODE
+></DT
+><DD
+><P
+>Dump schema of database as it would be created by the official
+					 Paradox software, when a database is exported in CSV format. This
+					 option is the short form for --mode=schema.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>-v</CODE
+>
+          <CODE
+CLASS="OPTION"
+>--verbose</CODE
+></DT
+><DD
+><P
+>Output some more information from the header. This option is only
+					 needed if you want see some internal information which are usually
+					 not of any interessed.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>-c</CODE
+>
+          <CODE
+CLASS="OPTION"
+>--csv</CODE
+></DT
+><DD
+><P
+>Dump data records in CSV format. The first line of the output
+					  contains the names of each field, its type and size. This
+						option is the short form for --mode=csv.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>-s</CODE
+>
+          <CODE
+CLASS="OPTION"
+>--sql</CODE
+></DT
+><DD
+><P
+>Dump data records in SQL format. This
+						option is the short form for --mode=sql.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>-x</CODE
+>
+          <CODE
+CLASS="OPTION"
+>--html</CODE
+></DT
+><DD
+><P
+>Dump data records in HTML table format. This
+						option is the short form for --mode=html.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>-q</CODE
+>
+          <CODE
+CLASS="OPTION"
+>--sqlite</CODE
+></DT
+><DD
+><P
+>Dump data records into a sqlite database. This
+						option is the short form for --mode=sqlite. sqlite output always
+						requires to specify an output file with the option --output-file.
+						If the sqlite database file already exists, then pxview will
+						create a new table within that file. If a table with the same name
+						already exists, it will not be overwritten unless you pass the
+						option --delete-table.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>--mode=MODE</CODE
+></DT
+><DD
+><P
+>Sets the ouput mode. This options provides a different way
+					 to set the output format. --mode=sql is equivalent to --sql,
+					 --mode=csv to --csv, --mode=html to --html, --mode=sqlite to
+					 --sqlite and --mode=schema
+					 to --schema.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>-b FILE</CODE
+>
+          <CODE
+CLASS="OPTION"
+>--blobfile=FILE</CODE
+></DT
+><DD
+><P
+>If the database files references blobs (binary large objects)
+					 then read them from the
+					 given file and write each blob of type Blob, OLE, and Graphic
+					 into a single file. The filename will
+					 be constructed from the blobprefix option (or the tablename if no
+					 prefix is given), an underscore, the
+					 internal number of the blob and the value from the
+					 blobextension option (`blob' if
+					 no extension is given) separated by a dot. Blobs of
+					 type Memo and FmtMemo are treated like alpha fields and
+					 its content will be inserted into the regular output.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>-p PREFIX</CODE
+>
+          <CODE
+CLASS="OPTION"
+>--blobprefix=PREFIX</CODE
+></DT
+><DD
+><P
+>Use this prefix for each filename of a blob. You can write
+				   all blobs into a single directory by specifying a valid directory
+					 path name. You will have to make sure the directory exists before
+					 running pxview.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>--blobextension=EXT</CODE
+></DT
+><DD
+><P
+>Use this extension for each filename of a blob. If no extension
+					  is given, then `blob' will be used instead.
+					 </P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>-n FILE</CODE
+>
+          <CODE
+CLASS="OPTION"
+>--primary-index-file=FILE</CODE
+></DT
+><DD
+><P
+>Read the primary index from file. This option is only valid
+					  it you are reading a database file.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>-r ENCODING</CODE
+>
+          <CODE
+CLASS="OPTION"
+>--recode=ENCODING</CODE
+></DT
+><DD
+><P
+>Recode all fields of type alpha to the given encoding. You will
+					 have to specify the encoding similar to the
+					 <SPAN
+CLASS="APPLICATION"
+>recode</SPAN
+> command, by passing only the part
+					 on the right hand side of the `..' of what you usually pass to
+					 recode.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>--separator=CHAR</CODE
+></DT
+><DD
+><P
+>If the database is exported in csv format the given character
+					 will be used to separate field values. Other output formats will not
+					 be affected by this option. The default value is ','.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>--enclosure=CHAR</CODE
+></DT
+><DD
+><P
+>If the database is exported in csv format the given character
+					 will be used to enclose field values if the field is of type char().
+					 The enclosure will only take place if the delimiter between fields
+					 is part of the field value.  Other output formats will not
+					 be affected by this option. The default value is '"'.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>--fields=REGEX</CODE
+></DT
+><DD
+><P
+>This option allows to select certain fields by specifying
+					 an extended regular expression. It will only effect the csv, html,
+					 sql, and sqlite output. "field1|field23$" will select all fields whose name
+					 contains "field1" or end in "field23". If this option is not used
+					 als fields will be shown. The field name is case insensitive.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>--output-deleted</CODE
+></DT
+><DD
+><P
+>Output even those records that has been deleted. Paradox
+					  does not mark a record as deleted, but rather marks a complete
+						data block (which usually contains several records) or sets
+						its size to a lower value. If this option is active, then
+						pxview will assume each data block is filled with its
+						maximum number of records. This assumption may not always be true,
+						especially for the last data block. Therefore you should handle
+						the output with care.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>--mark-deleted</CODE
+></DT
+><DD
+><P
+>Adds an additional column to the csv and html output which
+					  indicates whether a record is deleted or actually available.
+						This option is only available in csv and html mode and makes
+						only sense if the option <CODE
+CLASS="OPTION"
+>--ouput-deleted</CODE
+> is
+						passed as well. If you do not pass
+						<CODE
+CLASS="OPTION"
+>--output-deleted</CODE
+> you will get
+						an extra column with just zeros because none of the records is 
+						deleted, otherwise it would not be shown.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>--delete-table</CODE
+></DT
+><DD
+><P
+>Adds a sql command at the begining of the sql output to delete
+					 an existing table before creating the new one. If used in sqlite
+					 mode it will drop the table before creating a new one.
+					 This option only affects sql and sqlite output.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>--skip-schema</CODE
+></DT
+><DD
+><P
+>Do not add at the beginning of the sql output the commands
+					 to create the table schema. This is useful if an existing table
+					 shall be populated with new records.
+					 This option only affects sql and sqlite output.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>--use-copy</CODE
+></DT
+><DD
+><P
+>Use the sql COPY statement in the sql output instead of the
+					 default INSERT. Using COPY is usually faster when the data is
+					 imported into a database, but less supported
+					 by databases. This option only affects sql output.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>--short-insert</CODE
+></DT
+><DD
+><P
+>Use a short version of INSERT statements in the sql output.
+					 This will skip the list of field names which are being affected
+					 by the insert statement,
+					 but uses a form like 'insert into tablename values (...)'.
+					 Such statements will only work if the table has the same number
+					 of fields in the same sequence as the INSERT statement lists the
+					 field values. This option will mostly not be appropriate if you
+					 want to extract some fields from a larger table (--fields) and
+					 populate an existing sql table whose schema is not identical to
+					 the paradox file.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>--tablename=NAME</CODE
+></DT
+><DD
+><P
+>Use given tablename instead of the one stored in the database
+					 file. This option only affects schema, sql and sqlite output.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>--set-sql-type=SPEC</CODE
+></DT
+><DD
+><P
+>Overrides the default mapping from a paradox field type to
+					  a sql field type. This option only affects sql and sqlite output
+						and should be used with care. You can output the predefined
+						mapping by
+						passing the option <CODE
+CLASS="OPTION"
+>--help</CODE
+>. SPEC is a colon
+						separated pair of field types. The one left to the colon is
+						the paradox type, the other one is the sql type. The paradox
+						type is one of `alpha', `date', `short', `long', `currency',
+						`number', `logical', `memoblob', `blob', `fmtblob', `ole',
+						`graphic', `time', `timestamp',
+						`autoinc', `bcd', or `bytes'. The sql type can be any available
+						type like real, integer or text. It is up to the user to specify
+						a valid type. If the sql type requires
+						a length (e.g char(x)), then it can put into
+						the type specification with the placeholder `%d', e.g.
+						`alpha:char(%d)'. There is currently no check for reasonable
+						type mapping.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>--empty-string-is-null</CODE
+></DT
+><DD
+><P
+>Outputs NULL in the sql ouput for all empty strings in the
+					  paradox file. This option only affects sql and sqlite output.
+						Paradox does not distinguish between fields of type alpha
+						which has no characters or contain the NULL string. The default
+						is to tread them as empty strings. By passing this option they
+						will be treaded as NULL strings in the sql output.</P
+></DD
+></DL
+></DIV
+><P
+>The none optional parameter FILE is the Paradox file which shall
+		 be read.</P
+><P
+>If you pass two or more options to set the output format then
+		 each format
+		 will be output one after the other starting with csv followed by
+		 html and finally sql.</P
+><P
+>The default field separator if exporting csv format is a tabulator.
+		 Fields will be enclosed in " if required.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN275"
+></A
+><H2
+>BLOB FILES</H2
+><P
+>Fields of type blob will only be regarded in the output
+		  if a file is set with the option <CODE
+CLASS="OPTION"
+>--blobfile</CODE
+>
+			containing the blobs (usually a .MB file). Paradox distinguishes
+			five different types of blobs of which two of them are actually pure
+			text and the remaining three are binary data. The two text blobs
+			(Memo and FmtMemo) are treaded like alpha fields and its content will
+			be included in the regular output. The binary blobs are separately
+			written to a file.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN279"
+></A
+><H2
+>PRIMARY INDEX FILES</H2
+><P
+>pxview supports not just the reading and outputting of DB
+		  files but also
+		  of primary and secondary index files (PX, XGx, YGx files). This section
+			will only focus on primary index files. Do not confuse this with the
+			option <CODE
+CLASS="OPTION"
+>--primary-index-file</CODE
+> which is just
+			accelerated access on database records in a .DB file, but this section
+			is about outputting the content of a primary index file.</P
+><P
+>An index file
+			has the same basename as the database file. If it exists, then the database
+			file will have the header field 'Num. of prim. Key fields' set to a
+			value greater than 0. An index file is actually a regular database file
+			with some extra columns and a slightly different header. There is no
+			further reference between the database and the index file beside the file
+			name. You can always read a database without its primary index, but
+			access will be slower.</P
+><P
+>Each database file may have one or more primary key fields. The number
+			is stored in the header of the database file.  Primary key fields
+			must be in the first n columns of the database file. If for
+			example the number of primary key fields is set to two, then the
+			first two fields in the database file are primary keys.
+			Consequently the .PX file will have these two fields as well. The
+			values of the primay key fields in the index file are those of the
+			first record in the referenced data block (see below).</P
+><P
+>Each primary index file has beside the key fields three further
+		  columns which point to data blocks in the database file. In order
+			to understand these columns you need to know that database files are
+			segmented into datablocks. The size of each data block can be calculated
+			from the 'Max. Table size' value in the database file header. Datablocks
+			are organized in a double linked list. Each
+			data block is prefaced by a six bytes data block header which contains
+			references to the previous and next data block in the list and the size
+			of the block.</P
+><P
+>The n+1 column (with n being the number of primary key fields) in the
+		  primary index file contains the block number in the database file.
+			The first block has number 1. The block number is
+			used to locate the data block in the database file. It can be calculated
+			by `(blocknumber - 1) * datablocksize + headersize'.
+		  The n+2 column contains the number of records in the
+		  referenced data block.</P
+><P
+>Beside records whose block numbers point to blocks in the database
+		  file, there are also so called index blocks. Its block numbers reffer
+			other index blocks in the primary index itself. The reason for this is
+			the tree structure of the index which is explained in the file
+			/usr/share/doc/pxlib-doc/paradox4.txt. The number of records in this
+			index blocks is the sum of all records referenced by the records in
+			the block this block references. If for example you have 100 records
+			each pointing to a data block in the database with 5 records each,
+			and those 100 records are store in a datablock number 1 in the index
+			file, then the reference from an index record to this block number 1
+			will have a record count 100*5. The index record itself will be part
+			of an index block.</P
+><P
+>The last column has some unknown meaning. It is often set to
+		  zero.</P
+><P
+>When you output the content of an primary index file you will
+		  notice a forth extra column. This one is added by pxview itself.
+			It is the block number the current record is stored in. It is very
+			helpful for investigating the tree structure of the index file.
+			Quite often one will find index blocks at the begining of an index
+			file.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN290"
+></A
+><H2
+>SEE ALSO</H2
+><P
+>pxwrite(1), recode(1), iconv(1)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN293"
+></A
+><H2
+>AUTHOR</H2
+><P
+>This manual page was written by Uwe Steinmann &lt;<CODE
+CLASS="EMAIL"
+>&#60;<A
+HREF="mailto:uwe@steinmann.cx"
+>uwe@steinmann.cx</A
+>&#62;</CODE
+>&gt;.
+      Permission is
+      granted to copy, distribute and/or modify this document under
+      the terms of the <ACRONYM
+CLASS="ACRONYM"
+>GNU</ACRONYM
+> Free Documentation
+      License, Version 1.1 or any later version published by the Free
+      Software Foundation; with no Invariant Sections, no Front-Cover
+      Texts and no Back-Cover Texts.</P
+></DIV
+></BODY
+></HTML
+>
