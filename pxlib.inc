@@ -8,7 +8,11 @@ function output_manpage_content($funcname) {
 		$content = file_get_contents($filename);
 		$start = strpos($content, "<H1");
 		if($start !== false) {
-			echo substr($content, $start, -16);
+			$content = substr($content, $start, -16);
+			$pattern = "/([a-zA-Z_]*)\(([0-9])\)/";
+			$replacement = "<a href=\"http://localhost:8088/TestDir/pxlib/documentation.php?manpage=\$1\">\$1(\$2)</a>";
+			$content = preg_replace($pattern, $replacement, $content);
+			echo $content."\n";
 		}
 	} else {
 		echo "Manual page for ".$funcname." not found!\n";
