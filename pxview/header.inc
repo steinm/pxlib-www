@@ -50,7 +50,7 @@
         <a href="./index.php">Home</a> |
         <a href="./documentation.php">Documentation</a> |
         <a href="./installation.php">Installation</a> |
-        <a href="http://sourceforge.net/projects/pxlib/">Download</a> |
+        <a href="http://sourceforge.net/project/showfiles.php?group_id=79398&package_id=81572">Download</a> |
         <a href="./contact.php">Contact</a>
       </div>
     </div>
