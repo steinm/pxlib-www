@@ -2,7 +2,7 @@
 	include("header.inc");
 ?>
    <h2>Mailing list</h2>
-	 <p>pxlib has its own mailing list at &lt;pslib-dev at codigolivre.org.br&gt;.
+	 <p>pxlib has its own mailing list at &lt;pxlib-devel at lists.sourceforge.net&gt;.
 	 If you have questions or comments, that would be the best place to
 	 get answers and start discussions.
 
