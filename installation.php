@@ -34,19 +34,19 @@
 					<h2>Installation on debian</h2>
 					<p>Debian sarge users can <span class="sourcecode">apt-get</span>
 					  from the official debian repositories. For those still using
-						woody you need get the Debian source package an compile it
+						woody you need get the Debian source package and compile it
 						yourself.
 					</p>
 
-					<h2>Installation on rpm based system</h2>
+					<h2>Installation on rpm based systems</h2>
 					<p>Those using an rpm based system like Fedora, SuSE, or Mandrake
 					  may try the precompiled binaries or recompile from the rpm source
-						package, all available in the download section.
+						package, all available in the <a href="http://sourceforge.net/project/showfiles.php?group_id=79398&package_id=81444">download section</a>.
 					</p>
 
-					<h2>Installation on MS Windows</h2>
+					<h2>Installation on MS Windows&tm;</h2>
 					<p>I have heard of users being able to compile pxlib even on
-					  MS Windows. Unfortunately, I've never managed to do it.
+					  MS Windows&trade;. Unfortunately, I've never managed to do it.
 						Let me know if you know how to do it.
 					<p>
 <?php
