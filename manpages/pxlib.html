@@ -1191,50 +1191,6 @@ CLASS="REFSECT1"
 NAME="AEN451"
 ></A
 ><H2
->DOCUMENT INFORMATION</H2
-><P
->PostScript documents usually contain a header made of comments
-		  with information about the document. The printer usually disregards
-			this information but many PostScript viewer use it. Besides that,
-			one can also place pdfmarks into the PostScript document which contain
-			the title, keywords, author and other information. pslib provides the
-			function <CODE
-CLASS="FUNCTION"
->PS_set_info(3)</CODE
-> to set those fields.</P
-><DIV
-CLASS="FUNCSYNOPSIS"
-><P
-></P
-><A
-NAME="AEN455"
-></A
-><P
-><CODE
-><CODE
-CLASS="FUNCDEF"
->int PS_set_info</CODE
->(pxdoc_t *psdoc, const char *key, const char *value);</CODE
-></P
-><P
-></P
-></DIV
-><P
-><CODE
-CLASS="FUNCTION"
->PS_set_info(3)</CODE
-> must be called before the
-		  first page. Calling it later will have no effect and produces a warning.
-			The function may also be used to set the bounding box of the document.
-			Usually there is no need for it, because the dimension of the first
-			page will be used for the bounding box.</P
-></DIV
-><DIV
-CLASS="REFSECT1"
-><A
-NAME="AEN467"
-></A
-><H2
 >SEE ALSO</H2
 ><P
 >The detailed manual pages for each function of the library.</P
@@ -1242,7 +1198,7 @@ NAME="AEN467"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN470"
+NAME="AEN454"
 ></A
 ><H2
 >AUTHOR</H2
