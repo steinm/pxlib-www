@@ -1,7 +1,7 @@
 <?php
 	include("header.inc");
-	$mailto = "steinm@pb.steinmann.cx";
-	$extraheader = "from: pslib-dev@codigolivre.org.br\nbcc:steinm@steinmann.cx";
+	$mailto = "pxlib-devel@lists.sourceforge.net";
+	$extraheader = "from: pxlib-devel@lists.sourceforge.net\nbcc:uwe@steinmann.cx";
 
 	if(!empty($text) && !empty($subject)) {
 ?>
@@ -13,7 +13,7 @@
 			$extraheader .= "\nReply-To: ".$email.", uwe@steinmann.cx";
 		$mailtext = "This mail was send through the web form of pxlib's home page.\n";
 		if(!empty($email)) {
-			$mailtext .= "Replies to this mail will be send to the uwe@steinmann.cx\nand the submitter of this comment.\n\n";
+			$mailtext .= "Replies to this mail will be send to the mailing list pxlib-devel\nand the submitter of this comment.\n\n";
 		}
 		$mailtext .= stripslashes($text);
 		mail($mailto, "[pxlib web form] ".stripslashes($subject), $mailtext, $extraheader);
