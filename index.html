@@ -6,18 +6,20 @@
 <body bgcolor="#ffffff" text="#000000" link="#00008b" vlink="#8b0000" alink="#ff0000">
 <center><p> <font size=+3><b>pxlib: C Library to read Paradox Database files</b></font></p><table width=90% cellpadding=5><tr><td>
 
-<p>pxlib is a simply and still small C library to read Paradox DB files. It
-supports all versions starting from 3.0. It currently has a very limited set of
-functions like to open a DB file, read its header and read every single record.
-It can also extract blob data and write it to a file.
+<p>pxlib is a simply and still small C library to read and write Paradox DB
+files. It supports all versions starting from 3.0. It currently has a very
+limited set of functions like to open a DB file, read its header and read every
+single record.  It can also extract blob data and write it to a file. The write
+support is still very experimental.
+
 <p><a href="pxview.html">pxview</a> is a small command line program which uses
 pxlib.
 
 </td></tr></table>
 <p><p> <font size=+3><b>Features</b></font></p><table width=90% cellpadding=5><tr><td>
 <UL>
-  <LI>Reading Paradox DB files
-	<LI>Output of sql, csv, html
+  <LI>Reading/writing Paradox DB files
+	<LI>Reading of primary index files (.PX)
 	<LI>Recoding of character fields
 	<LI>Reading Blobs (.MB files) and write them to single files
 </UL>
@@ -25,13 +27,13 @@ pxlib.
 </td></tr></table>
 <p><p> <font size=+3><b>Downloading</b></font></p><table width=90% cellpadding=5><tr><td>
 
-<p> The most recent release of pxlib is version 0.2.0.
+<p> The most recent release of pxlib is version 0.2.1.
 
 <ul>
-<li>Source and Debian package of version 0.2.0 for PPC is available at <A HREF="http://sourceforge.net/projects/pxlib/">sourceforge</A>
+<li>Source and Debian package of version 0.2.1 for PPC is available at <A HREF="http://sourceforge.net/projects/pxlib/">sourceforge</A>
 </ul>
 
-<p>To compile this you'll only need a C Compiler, i recent glibc with iconv or
+<p>To compile this you'll only need a C Compiler, a recent glibc with iconv or
 a not so recent glibc and librecode.
 
 </td></tr></table>
@@ -45,6 +47,16 @@ a not so recent glibc and librecode.
 <p><p> <font size=+3><b>recent news</b></font></p><table width=90% cellpadding=5><tr><td>
 
 <table border=1>
+ <tr>
+  <td valign=top>November 09, 2003</td>
+	<td valign=top>version 0.2.1</td>
+	<td>
+	 <ul>
+	  <li>fixed header size which was to small for databases with many fields.
+   </ul>
+	</td>
+ </tr>
+
  <tr>
   <td valign=top>October 30, 2003</td>
 	<td valign=top>version 0.2.0</td>
