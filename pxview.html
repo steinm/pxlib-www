@@ -1,0 +1,127 @@
+<html>
+<head>
+<link rev="made" href="mailto:uwe@Steinmann.cx">
+<title>pxview: Program to read Paradox Database files</title>
+</head>
+<body bgcolor="#ffffff" text="#000000" link="#00008b" vlink="#8b0000" alink="#ff0000">
+<center><p> <font size=+3><b>pxview: Program to read Paradox Database files</b></font></p><table width=90% cellpadding=5><tr><td>
+
+<p>pxview is a program to read Paradox DB files. It is based on the
+pxlib library. pxview allows to output csv for reading with spread sheets
+or sql to import into a relational database. You can also just show some
+information and the table structure of the database.
+
+</td></tr></table>
+<p><p> <font size=+3><b>Features</b></font></p><table width=90% cellpadding=5><tr><td>
+<UL>
+  <LI>Reading Paradox DB files
+</UL>
+
+</td></tr></table>
+<p><p> <font size=+3><b>Downloading</b></font></p><table width=90% cellpadding=5><tr><td>
+
+<p> The most recent release of pxview is version 0.0.6.
+
+<ul>
+<li>Source and Debian package of version 0.0.6 for PPC is available at <A HREF="http://sourceforge.net/projects/pxlib/">sourceforge</A>
+</ul>
+
+<p> To compile this you'll only need a C Compiler.
+
+</td></tr></table>
+<p><p> <font size=+3><b>FAQ</b></font></p><table width=90% cellpadding=5><tr><td>
+<DL>
+  <DT><B></B>
+  <DD>
+</DL>
+
+</td></tr></table>
+<p><p> <font size=+3><b>recent news</b></font></p><table width=90% cellpadding=5><tr><td>
+
+<table border=1>
+
+<tr>
+ <td valign=top>July 31, 2003</td>
+ <td>version 0.0.6</td>
+ <td>
+  <ul>
+	 <li>output sql data only if num records &lt; 0
+	 <li>put field values into enclosing char only if the delimiter is in
+	     the field value
+   <li>added option -v to output more header information
+	 <li>added spec file to create rpms
+	 <li>don't use enclosure characters in sql output
+	</ul>
+ </td>
+</tr>
+
+<tr>
+ <td valign=top>July 23, 2003</td>
+ <td>version 0.0.5</td>
+ <td>
+  <ul>
+	 <li>added support for recoding alpha fields
+	 <li>access to alpha fields is done with PX_get_data_alpha()
+	</ul>
+ </td>
+</tr>
+
+<tr>
+ <td valign=top>June 11, 2003</td>
+ <td>version 0.0.4</td>
+ <td>
+  <ul>
+	 <li>proper handling of negative Long, Short, Double value
+   <li>finaly implemented export to a given output file (option --output)
+   <li>added option --deletetable
+   <li>updated manual page
+   <li>calling pxview as px2sql or px2csv will set the appropriate options
+   <li>moved data conversion routines to pxlib
+	</ul>
+ </td>
+</tr>
+
+<tr>
+ <td valign=top>Not published</td>
+ <td>version 0.0.3</td>
+ <td>
+  <ul>
+	 <li>many bugfixes
+	 <li>output of sql
+	</ul>
+ </td>
+</tr>
+
+<tr>
+ <td valign=top>June 03, 2003</td>
+ <td>version 0.0.2</td>
+ <td>
+  <ul>
+	 <li>
+	</ul>
+ </td>
+</tr>
+
+<tr>
+ <td valign=top>April 29, 2003</td>
+ <td>version 0.0.1</td>
+ <td>
+  <ul>
+	 <li>initial release
+	</ul>
+ </td>
+</tr>
+
+</table>
+
+</td></tr></table><p><font size=-1>
+<a href="mailto:uwe@steinmann.cx">&lt;uwe@steinmann.cx&gt;</a><br>
+</font>
+</center>
+<A href="http://sourceforge.net/projects/pxlib/"> <IMG
+src="http://sourceforge.net/sflogo.php?group_id=38502" width="88" height="31"
+border="0" alt="SourceForge Logo"></A>
+</body>
+</html>
+
+
