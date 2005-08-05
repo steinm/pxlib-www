@@ -1,5 +1,143 @@
-          <h1>Archive</h1>
-  				<a href="./index.html" class="newsHeading">Released version 0.2.5</a>
+					<h1>Archive</h1>
+					<a href="./index.html" class="newsHeading">Released version 0.4.4</a>
+					<p class="newsDate">May 25, 2005</p>
+					<p class="newsSummary">
+						<ul>
+							<li>PX_get_data_alpha() may now return strings which are longer than the database field (e.g. when converting to a multibyte string)</li>
+							<li>fixed reencoding which failed when the input string passed to iconv contains zeros</li>
+							<li>codepage can be set when creating a database</li>
+							<li>fixed copy and paste error in doc/pxlib.sgml</li>
+							<li>added new function PX_create_blob_fp()</li>
+							<li>fixed many compiler warnings and some potential errors</li>
+							<li>added missing prototypes in paradox.h.in</li>
+							<li>allow to turn off warnings</li>
+							<li>PX_set_blob_file() works when reading and writing a file</li>
+							<li>added missing man page for PX_create_blob_file()</li>
+							<li>added overall man page for pxlib with many examples</li>
+							<li>PX_get_value() now returns many fields from the header which makes accessing the header struct directly mostly superfluous</li>
+					 </ul>
+					</p>
+
+					<a href="./index.html" class="newsHeading">Released version 0.4.3</a>
+					<p class="newsDate">December 30, 2004</p>
+					<p class="newsSummary">
+						<ul>
+							<li>added PX_timestamp2string() for conversion of paradox timestamps into a readable representation</li>
+							<li>various fixed for writing blob files</li>
+							<li>return value for bcd fields uses decimal_point from locale</li>
+							<li>added spanish translations (thanks to jrodriguez@innox.com.mx)</li>
+					 </ul>
+					</p>
+
+					<a href="./index.html" class="newsHeading">Released version 0.4.2</a>
+					<p class="newsDate">never released</p>
+					<p class="newsSummary">
+						<ul>
+							<li>fixed possible errors in header of mb files</li>
+							<li>added support for type 3 blocks in mb files</li>
+					 </ul>
+					</p>
+
+					<a href="./index.html" class="newsHeading">Released version 0.4.1</a>
+					<p class="newsDate">November 08, 2004</p>
+					<p class="newsSummary">
+						<ul>
+							<li>various updates of debian files</li>
+							<li>small changes to the build process</li>
+					 </ul>
+					</p>
+
+					<a href="./index.html" class="newsHeading">Released version 0.4.0</a>
+					<p class="newsDate">November 11, 2004</p>
+					<p class="newsSummary">
+						<ul>
+							<li>support for writing blobs</li>
+							<li>some man page updates</li>
+					 </ul>
+					</p>
+
+					<a href="./index.html" class="newsHeading">Released version 0.3.1</a>
+					<p class="newsDate">October 12, 2004</p>
+					<p class="newsSummary">
+						<ul>
+							<li>fixed segm fault in put_px_datahead() when second datablock is written</li>
+							<li>free memory when pxblob_t is deleted</li>
+							<li>separated code for recoding into encode.c</li>
+					 </ul>
+					</p>
+
+					<a href="./index.html" class="newsHeading">Released version 0.3.0</a>
+					<p class="newsDate">July 20, 2004</p>
+					<p class="newsSummary">
+						<ul>
+							<li>various man page updates</li>
+							<li>Blob data stored in the record itself can be read</li>
+							<li>added function PX_set_blob_file(), PX_has_blob_file()</li>
+							<li>added function PX_get_data_bcd(), PX_put_data_bcd(), PX_get_data_blob(), PX_get_data_graphic()</li>
+					 </ul>
+					</p>
+
+					<a href="./index.html" class="newsHeading">Released version 0.2.11</a>
+					<p class="newsDate">July 15, 2004</p>
+					<p class="newsSummary">
+						<ul>
+							<li>PX_read_blob_data() has been completely rewritten and can now handle any type of blob data. Watch for the new prototype.</li>
+					 </ul>
+					</p>
+
+					<a href="./index.html" class="newsHeading">Released version 0.2.10</a>
+					<p class="newsDate">July 14, 2004</p>
+					<p class="newsSummary">
+						<ul>
+							<li>creating a paradox db without records led to a corrupted file because the header was not fill with zeros to its full size.</li>
+					 </ul>
+					</p>
+
+					<a href="./index.html" class="newsHeading">Released version 0.2.9</a>
+					<p class="newsDate">May 26, 2004</p>
+					<p class="newsSummary">
+						<ul>
+							<li>new function PX_strdup() to duplicate a string but use the memory management functions of the paradox document.</li>
+					 </ul>
+					</p>
+
+					<a href="./index.html" class="newsHeading">Released version 0.2.8</a>
+					<p class="newsDate">May 13, 2004</p>
+					<p class="newsSummary">
+						<ul>
+							<li>new function PX_get_opaque()</li>
+							<li>fixed all references to PX_open_filename which is now PX_open_file</li>
+							<li>pass const char to API function if possible</li>
+							<li>updated build process</li>
+							<li>Better checking whether px file belongs to db file</li>
+						/ul>
+					</p>
+
+					<a href="./index.html" class="newsHeading">Released version 0.2.7</a>
+					<p class="newsDate">January 25, 2004</p>
+					<p class="newsSummary">
+						<ul>
+							<li>added man pages for blob file handling</li>
+							<li>set some more header fields. db and px files are now read correctly by the Paradox software.</li>
+							<li>changed default file version to 7.0</li>
+					 </ul>
+					</p>
+
+					<a href="./index.html" class="newsHeading">Released version 0.2.6</a>
+					<p class="newsDate">December 09, 2003</p>
+					<p class="newsSummary">
+						<ul>
+							<li>added new function PX_get_recordsize()</li>
+							<li>set indexRoot and numIndexLevels in .PX files</li>
+							<li>fixed segm fault when writing a primary index file</li>
+							<li>fixed reading of blobs</li>
+							<li>two new header fields are known (indexRoot, numIndexLevels)</li>
+							<li>many more translations</li>
+							<li>some more tweaking to finally store the file update time in the header without messing it up</li>
+					 </ul>
+					</p>
+
+					<a href="./index.html" class="newsHeading">Released version 0.2.5</a>
 					<p class="newsDate">8 Jan 04</p>
 					<p class="newsSummary">
 					<ul>
@@ -14,7 +152,7 @@
 					</p>
 
 					<a href="./index.html" class="newsHeading">Released version 0.2.4</a>
-  				<p class="newsDate">December 09, 2003</p>
+					<p class="newsDate">December 09, 2003</p>
 					<p class="newsSummary">
 						<ul>
 							<li> Paradox tables can be read by the Paradox software if the
@@ -31,7 +169,7 @@
 					</p>
 
 					<a href="./index.html" class="newsHeading">Released version 0.2.3</a>
-  				<p class="newsDate">December 05, 2003</p>
+					<p class="newsDate">December 05, 2003</p>
 					<p class="newsSummary">
 						<ul>
 							<li> updated many error messages
@@ -41,7 +179,7 @@
 					</p>
 
 					<a href="./index.html" class="newsHeading">Released version 0.2.2</a>
-  				<p class="newsDate">November 17, 2003</p>
+					<p class="newsDate">November 17, 2003</p>
 					<p class="newsSummary">
 						<ul>
 							<li> initial multi language support
@@ -56,7 +194,7 @@
 					</p>
 
 					<a href="./index.html" class="newsHeading">Released version 0.2.1</a>
-  				<p class="newsDate">November 09, 2003</p>
+					<p class="newsDate">November 09, 2003</p>
 					<p class="newsSummary">
 						<ul>
 							<li>fixed header size which was to small for databases with many fields.
@@ -64,7 +202,7 @@
 					</p>
 
 					<a href="./index.html" class="newsHeading">Released version 0.2.0</a>
-  				<p class="newsDate">October 30, 2003</p>
+					<p class="newsDate">October 30, 2003</p>
 					<p class="newsSummary">
 						<ul>
 							<li>update to latest autoconf tools
@@ -77,7 +215,7 @@
 					</p>
 
 					<a href="./index.html" class="newsHeading">Released version 0.1.9</a>
-  				<p class="newsDate">September 29, 2003</p>
+					<p class="newsDate">September 29, 2003</p>
 					<p class="newsSummary">
 						<ul>
 							<li>encoding for data, that is to be written in a record can be set
@@ -97,7 +235,7 @@
 					</p>
 
 					<a href="./index.html" class="newsHeading">Released version 0.1.2</a>
-  				<p class="newsDate">August 21, 2003</p>
+					<p class="newsDate">August 21, 2003</p>
 					<p class="newsSummary">
 						<ul>
 							<li>primary index files can be read
@@ -108,7 +246,7 @@
 					</p>
 
 					<a href="./index.html" class="newsHeading">Released version 0.1.1</a>
-  				<p class="newsDate">August 15, 2003</p>
+					<p class="newsDate">August 15, 2003</p>
 					<p class="newsSummary">
 						<ul>
 							<li>fixed segm fault when calling PX_get_record()
@@ -116,7 +254,7 @@
 					</p>
 
 					<a href="./index.html" class="newsHeading">Released version 0.1.0</a>
-  				<p class="newsDate">August 14, 2003</p>
+					<p class="newsDate">August 14, 2003</p>
 					<p class="newsSummary">
 						<ul>
 							<li>New function PX_get_record2() which has two extra parameter.
@@ -136,7 +274,7 @@
 					</p>
 
 					<a href="./index.html" class="newsHeading">Released version 0.0.9</a>
-  				<p class="newsDate">August 11, 2003</p>
+					<p class="newsDate">August 11, 2003</p>
 					<p class="newsSummary">
 						<ul>
 							<li>man pages are not created if docbook-to-man is missing
@@ -149,7 +287,7 @@
 					</p>
 
 					<a href="./index.html" class="newsHeading">Released version 0.0.8</a>
-  				<p class="newsDate">July 31, 2003</p>
+					<p class="newsDate">July 31, 2003</p>
 					<p class="newsSummary">
 						<ul>
 							<li>updated documentation
@@ -157,8 +295,8 @@
 						</ul>
 					</p>
 
-  				<a href="./index.html" class="newsHeading">Released version 0.0.7</a>
-  				<p class="newsDate">July 23, 2003</p>
+					<a href="./index.html" class="newsHeading">Released version 0.0.7</a>
+					<p class="newsDate">July 23, 2003</p>
 					<p class="newsSummary">
 						<ul>
 							<li>read more fields from the header,
@@ -168,8 +306,8 @@
 						</ul>
 					</p>
 
-  				<a href="./index.html" class="newsHeading">Released version 0.0.6</a>
-  				<p class="newsDate">July 18, 2003</p>
+					<a href="./index.html" class="newsHeading">Released version 0.0.6</a>
+					<p class="newsDate">July 18, 2003</p>
 					<p class="newsSummary">
 						<ul>
 							<li>more documentation,
@@ -178,8 +316,8 @@
 						</ul>
 					</p>
 
-  				<a href="./index.html" class="newsHeading">Released version 0.0.5</a>
-  				<p class="newsDate">July 18, 2003</p>
+					<a href="./index.html" class="newsHeading">Released version 0.0.5</a>
+					<p class="newsDate">July 18, 2003</p>
 					<p class="newsSummary">
 						<ul>
 							<li>added PX_delete()
@@ -188,8 +326,8 @@
 						</ul>
 					</p>
 
-  				<a href="./index.html" class="newsHeading">Released version 0.0.4</a>
-  				<p class="newsDate">June 11, 2003</p>
+					<a href="./index.html" class="newsHeading">Released version 0.0.4</a>
+					<p class="newsDate">June 11, 2003</p>
 					<p class="newsSummary">
 						<ul>
 							<li>fixed segm fault if input file does not exist
@@ -199,8 +337,8 @@
 						</ul>
 					</p>
 
-  				<a href="./index.html" class="newsHeading">Released version 0.0.3</a>
-  				<p class="newsDate">Not published</p>
+					<a href="./index.html" class="newsHeading">Released version 0.0.3</a>
+					<p class="newsDate">Not published</p>
 					<p class="newsSummary">
 						<ul>
 							<li>check for zero record size and header size
@@ -209,16 +347,16 @@
 						</ul>
 					</p>
 
-  				<a href="./index.html" class="newsHeading">Released version 0.0.2</a>
-  				<p class="newsDate">June 03, 2003</p>
+					<a href="./index.html" class="newsHeading">Released version 0.0.2</a>
+					<p class="newsDate">June 03, 2003</p>
 					<p class="newsSummary">
 						<ul>
 							<li>support for blobs, bug fixes
 						</ul>
 					</p>
- 
-  				<a href="./index.html" class="newsHeading">Released version 0.0.1</a>
-  				<p class="newsDate">April 29, 2003</p>
+
+					<a href="./index.html" class="newsHeading">Released version 0.0.1</a>
+					<p class="newsDate">April 29, 2003</p>
 					<p class="newsSummary">
 						<ul>
 							<li>initial release
