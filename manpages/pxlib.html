@@ -64,6 +64,14 @@ NAME="AEN23"
 CLASS="LITERAL"
 >paradox.h</TT
 > and link against libpx.
+			If the libgsf file access is to be used <TT
+CLASS="LITERAL"
+>paradox-gsf.h</TT
+>
+			has to be included instead of <TT
+CLASS="LITERAL"
+>paradox.h</TT
+>.
 			Before reading or writing a
 			database file the library should be initialized with
 			<CODE
@@ -74,7 +82,7 @@ CLASS="FUNCTION"
 			LC_ALL. The library should
 			be finalized by <CODE
 CLASS="FUNCTION"
->PS_shutdown(3)</CODE
+>PX_shutdown(3)</CODE
 >.</P
 ><P
 >A Paradox database is
@@ -148,6 +156,22 @@ struct px_head {
 };
 	  </PRE
 ><P
+>The structure is defined in <TT
+CLASS="LITERAL"
+>paradox.h</TT
+> and can be
+			directly
+		  accessed, thought it is not encouraged at all, because the structure will
+			disappear in the future. Most header values can already be read with
+			<CODE
+CLASS="FUNCTION"
+>PX_get_value(3)</CODE
+> or
+			<CODE
+CLASS="FUNCTION"
+>PX_get_parameter(3)</CODE
+>.</P
+><P
 >The following example will do the basic
 			preparation without creating nor opening a document on the disk.</P
 ><PRE
@@ -172,7 +196,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN44"
+NAME="AEN50"
 ></A
 ><P
 ><CODE
@@ -191,7 +215,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN53"
+NAME="AEN59"
 ></A
 ><P
 ><CODE
@@ -230,7 +254,7 @@ main(int argc, char *argv[]) {
 	pxdoc_t *pxdoc;
 
 	PX_boot();
-	pxdoc = PS_new();
+	pxdoc = PX_new();
 	PX_open_file(pxdoc, "test.db");
 	PX_close(pxdoc);
 	PX_delete(pxdoc);
@@ -250,6 +274,11 @@ CLASS="FUNCTION"
 CLASS="FUNCTION"
 >PX_open_file(3)</CODE
 >.
+			<CODE
+CLASS="FUNCTION"
+>PX_close(3)</CODE
+>
+			is crucial because it also flushes unwritten blocks to disk.
 			</P
 ><P
 >There are more sophisticated functions to open a Paradox database.
@@ -272,7 +301,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN75"
+NAME="AEN82"
 ></A
 ><P
 ><CODE
@@ -317,7 +346,7 @@ CLASS="FUNCTION"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN94"
+NAME="AEN101"
 ></A
 ><H2
 >READING RECORDS FROM A DATABASE</H2
@@ -334,7 +363,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN97"
+NAME="AEN104"
 ></A
 ><P
 ><CODE
@@ -353,7 +382,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN110"
+NAME="AEN117"
 ></A
 ><P
 ><CODE
@@ -379,6 +408,9 @@ CLASS="FUNCTION"
 			that piece of memory straight from the database file without
 			modifications.</P
 ><P
+>Paradox files can be encrypted. pxlib will automatically decrypt
+		  a file while reading without the need to supply a password.</P
+><P
 >			Once the record data has been read it can be accessed with a number of
 			different functions depending on the field type. The following
 			list contains the field type and the function needed to retrieve
@@ -398,7 +430,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN133"
+NAME="AEN141"
 ></A
 ><P
 ><CODE
@@ -438,7 +470,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN152"
+NAME="AEN160"
 ></A
 ><P
 ><CODE
@@ -464,7 +496,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN166"
+NAME="AEN174"
 ></A
 ><P
 ><CODE
@@ -492,7 +524,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN183"
+NAME="AEN191"
 ></A
 ><P
 ><CODE
@@ -516,7 +548,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN199"
+NAME="AEN207"
 ></A
 ><P
 ><CODE
@@ -540,7 +572,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN215"
+NAME="AEN223"
 ></A
 ><P
 ><CODE
@@ -564,7 +596,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN231"
+NAME="AEN239"
 ></A
 ><P
 ><CODE
@@ -591,7 +623,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN248"
+NAME="AEN256"
 ></A
 ><P
 ><CODE
@@ -630,7 +662,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN274"
+NAME="AEN282"
 ></A
 ><P
 ><CODE
@@ -671,7 +703,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN301"
+NAME="AEN309"
 ></A
 ><P
 ><CODE
@@ -706,7 +738,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN317"
+NAME="AEN325"
 ></A
 ><P
 ><CODE
@@ -734,7 +766,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN334"
+NAME="AEN342"
 ></A
 ><P
 ><CODE
@@ -929,7 +961,7 @@ CLASS="PROGRAMLISTING"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN353"
+NAME="AEN361"
 ></A
 ><H2
 >WRITING RECORDS INTO A DATABASE</H2
@@ -971,7 +1003,7 @@ main(int argc, char *argv[]) {
 	int numfields = 2;
 
 	PX_boot();
-	pxdoc = PS_new();
+	pxdoc = PX_new();
 	pxf[0].px_fname = PX_strdup(pxdoc, "column1");
 	pxf[0].px_ftype = pxfShort;
 	pxf[0].px_flen = 2;
@@ -990,7 +1022,7 @@ main(int argc, char *argv[]) {
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN363"
+NAME="AEN371"
 ></A
 ><H2
 >ENCODING</H2
@@ -1026,7 +1058,7 @@ CLASS="FUNCTION"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN370"
+NAME="AEN378"
 ></A
 ><H2
 >READING BLOBS</H2
@@ -1044,7 +1076,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN375"
+NAME="AEN383"
 ></A
 ><P
 ><CODE
@@ -1066,7 +1098,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN393"
+NAME="AEN401"
 ></A
 ><P
 ><CODE
@@ -1107,7 +1139,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN416"
+NAME="AEN424"
 ></A
 ><P
 ><CODE
@@ -1125,7 +1157,7 @@ CLASS="FUNCDEF"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN424"
+NAME="AEN432"
 ></A
 ><H2
 >WRITING BLOBS</H2
@@ -1137,7 +1169,7 @@ NAME="AEN424"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN427"
+NAME="AEN435"
 ></A
 ><H2
 >MEMORY MANAGEMENT, ERROR HANDLING</H2
@@ -1158,7 +1190,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN432"
+NAME="AEN440"
 ></A
 ><P
 ><CODE
@@ -1188,7 +1220,39 @@ CLASS="PARAMETER"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN451"
+NAME="AEN459"
+></A
+><H2
+>ENCRYPTION</H2
+><P
+>Paradox supports a very weak encryption of the data blocks. The
+		  headers are not encrypted. Encryption is accomplished by three
+			static tables with 256 bytes each and a long integer generated
+			from a password. The integer is called the checksum of the password.
+			The checksum is stored in the header of the .db file which makes
+			it feasable to decrypt a file even without knowing the password.
+			pxlib reads encrypted files silently without asking for additional
+			information. Writing an encrypted file requires to supply a password
+			for calculating the checksum. The password can be set with
+			<CODE
+CLASS="FUNCTION"
+>PX_set_paramter(3)</CODE
+>. Once it is set, encryption
+			is automatically turned on. The password must be set before writing
+			any records. The best place to do this, is right after calling
+			<CODE
+CLASS="FUNCTION"
+>PX_create_file(3)</CODE
+> or
+			<CODE
+CLASS="FUNCTION"
+>PX_create_fp(3)</CODE
+>.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN465"
 ></A
 ><H2
 >SEE ALSO</H2
@@ -1198,7 +1262,7 @@ NAME="AEN451"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN454"
+NAME="AEN468"
 ></A
 ><H2
 >AUTHOR</H2
