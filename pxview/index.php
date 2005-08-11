@@ -14,6 +14,8 @@
 						<ul>
   						<li>Reading Paradox database files and output them as csv, sql, sqlite or html
 							<li>Output many information about a paradox file</li>
+							<li>Reading encrypted files without knowing the password</li>
+							<li>Limit output to certain columns</li>
 						</ul>
 					</p>
 <?php

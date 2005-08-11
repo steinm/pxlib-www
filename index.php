@@ -16,6 +16,7 @@
 							<li>Reading/writing of primary index files (.PX)</li>
 							<li>Recoding of character fields</li>
 							<li>Reading/writing blobs (.MB files)</li>
+							<li>Reading/writing encrypted files, even without knowing the password</li>
 						</ul>
 					</p>
 <?php
