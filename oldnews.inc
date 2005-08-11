@@ -1,5 +1,5 @@
 					<h1>Archive</h1>
-					<a href="./index.html" class="newsHeading">Released version 0.4.4</a>
+					<a href="./news.php" class="newsHeading">Released version 0.4.4</a>
 					<p class="newsDate">May 25, 2005</p>
 					<p class="newsSummary">
 						<ul>
@@ -18,7 +18,7 @@
 					 </ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.4.3</a>
+					<a href="./news.php" class="newsHeading">Released version 0.4.3</a>
 					<p class="newsDate">December 30, 2004</p>
 					<p class="newsSummary">
 						<ul>
@@ -29,7 +29,7 @@
 					 </ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.4.2</a>
+					<a href="./news.php" class="newsHeading">Released version 0.4.2</a>
 					<p class="newsDate">never released</p>
 					<p class="newsSummary">
 						<ul>
@@ -38,7 +38,7 @@
 					 </ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.4.1</a>
+					<a href="./news.php" class="newsHeading">Released version 0.4.1</a>
 					<p class="newsDate">November 08, 2004</p>
 					<p class="newsSummary">
 						<ul>
@@ -47,7 +47,7 @@
 					 </ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.4.0</a>
+					<a href="./news.php" class="newsHeading">Released version 0.4.0</a>
 					<p class="newsDate">November 11, 2004</p>
 					<p class="newsSummary">
 						<ul>
@@ -56,7 +56,7 @@
 					 </ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.3.1</a>
+					<a href="./news.php" class="newsHeading">Released version 0.3.1</a>
 					<p class="newsDate">October 12, 2004</p>
 					<p class="newsSummary">
 						<ul>
@@ -66,7 +66,7 @@
 					 </ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.3.0</a>
+					<a href="./news.php" class="newsHeading">Released version 0.3.0</a>
 					<p class="newsDate">July 20, 2004</p>
 					<p class="newsSummary">
 						<ul>
@@ -77,7 +77,7 @@
 					 </ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.2.11</a>
+					<a href="./news.php" class="newsHeading">Released version 0.2.11</a>
 					<p class="newsDate">July 15, 2004</p>
 					<p class="newsSummary">
 						<ul>
@@ -85,7 +85,7 @@
 					 </ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.2.10</a>
+					<a href="./news.php" class="newsHeading">Released version 0.2.10</a>
 					<p class="newsDate">July 14, 2004</p>
 					<p class="newsSummary">
 						<ul>
@@ -93,7 +93,7 @@
 					 </ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.2.9</a>
+					<a href="./news.php" class="newsHeading">Released version 0.2.9</a>
 					<p class="newsDate">May 26, 2004</p>
 					<p class="newsSummary">
 						<ul>
@@ -101,7 +101,7 @@
 					 </ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.2.8</a>
+					<a href="./news.php" class="newsHeading">Released version 0.2.8</a>
 					<p class="newsDate">May 13, 2004</p>
 					<p class="newsSummary">
 						<ul>
@@ -113,7 +113,7 @@
 						/ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.2.7</a>
+					<a href="./news.php" class="newsHeading">Released version 0.2.7</a>
 					<p class="newsDate">January 25, 2004</p>
 					<p class="newsSummary">
 						<ul>
@@ -123,7 +123,7 @@
 					 </ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.2.6</a>
+					<a href="./news.php" class="newsHeading">Released version 0.2.6</a>
 					<p class="newsDate">December 09, 2003</p>
 					<p class="newsSummary">
 						<ul>
@@ -137,7 +137,7 @@
 					 </ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.2.5</a>
+					<a href="./news.php" class="newsHeading">Released version 0.2.5</a>
 					<p class="newsDate">8 Jan 04</p>
 					<p class="newsSummary">
 					<ul>
@@ -151,7 +151,7 @@
 					 </ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.2.4</a>
+					<a href="./news.php" class="newsHeading">Released version 0.2.4</a>
 					<p class="newsDate">December 09, 2003</p>
 					<p class="newsSummary">
 						<ul>
@@ -168,7 +168,7 @@
 						</ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.2.3</a>
+					<a href="./news.php" class="newsHeading">Released version 0.2.3</a>
 					<p class="newsDate">December 05, 2003</p>
 					<p class="newsSummary">
 						<ul>
@@ -178,7 +178,7 @@
 						</ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.2.2</a>
+					<a href="./news.php" class="newsHeading">Released version 0.2.2</a>
 					<p class="newsDate">November 17, 2003</p>
 					<p class="newsSummary">
 						<ul>
@@ -193,7 +193,7 @@
 						</ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.2.1</a>
+					<a href="./news.php" class="newsHeading">Released version 0.2.1</a>
 					<p class="newsDate">November 09, 2003</p>
 					<p class="newsSummary">
 						<ul>
@@ -201,7 +201,7 @@
 						</ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.2.0</a>
+					<a href="./news.php" class="newsHeading">Released version 0.2.0</a>
 					<p class="newsDate">October 30, 2003</p>
 					<p class="newsSummary">
 						<ul>
@@ -214,7 +214,7 @@
 						</ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.1.9</a>
+					<a href="./news.php" class="newsHeading">Released version 0.1.9</a>
 					<p class="newsDate">September 29, 2003</p>
 					<p class="newsSummary">
 						<ul>
@@ -234,7 +234,7 @@
 						</ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.1.2</a>
+					<a href="./news.php" class="newsHeading">Released version 0.1.2</a>
 					<p class="newsDate">August 21, 2003</p>
 					<p class="newsSummary">
 						<ul>
@@ -245,7 +245,7 @@
 						</ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.1.1</a>
+					<a href="./news.php" class="newsHeading">Released version 0.1.1</a>
 					<p class="newsDate">August 15, 2003</p>
 					<p class="newsSummary">
 						<ul>
@@ -253,7 +253,7 @@
 						</ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.1.0</a>
+					<a href="./news.php" class="newsHeading">Released version 0.1.0</a>
 					<p class="newsDate">August 14, 2003</p>
 					<p class="newsSummary">
 						<ul>
@@ -273,7 +273,7 @@
 						</ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.0.9</a>
+					<a href="./news.php" class="newsHeading">Released version 0.0.9</a>
 					<p class="newsDate">August 11, 2003</p>
 					<p class="newsSummary">
 						<ul>
@@ -286,7 +286,7 @@
 						</ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.0.8</a>
+					<a href="./news.php" class="newsHeading">Released version 0.0.8</a>
 					<p class="newsDate">July 31, 2003</p>
 					<p class="newsSummary">
 						<ul>
@@ -295,7 +295,7 @@
 						</ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.0.7</a>
+					<a href="./news.php" class="newsHeading">Released version 0.0.7</a>
 					<p class="newsDate">July 23, 2003</p>
 					<p class="newsSummary">
 						<ul>
@@ -306,7 +306,7 @@
 						</ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.0.6</a>
+					<a href="./news.php" class="newsHeading">Released version 0.0.6</a>
 					<p class="newsDate">July 18, 2003</p>
 					<p class="newsSummary">
 						<ul>
@@ -316,7 +316,7 @@
 						</ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.0.5</a>
+					<a href="./news.php" class="newsHeading">Released version 0.0.5</a>
 					<p class="newsDate">July 18, 2003</p>
 					<p class="newsSummary">
 						<ul>
@@ -326,7 +326,7 @@
 						</ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.0.4</a>
+					<a href="./news.php" class="newsHeading">Released version 0.0.4</a>
 					<p class="newsDate">June 11, 2003</p>
 					<p class="newsSummary">
 						<ul>
@@ -337,7 +337,7 @@
 						</ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.0.3</a>
+					<a href="./news.php" class="newsHeading">Released version 0.0.3</a>
 					<p class="newsDate">Not published</p>
 					<p class="newsSummary">
 						<ul>
@@ -347,7 +347,7 @@
 						</ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.0.2</a>
+					<a href="./news.php" class="newsHeading">Released version 0.0.2</a>
 					<p class="newsDate">June 03, 2003</p>
 					<p class="newsSummary">
 						<ul>
@@ -355,7 +355,7 @@
 						</ul>
 					</p>
 
-					<a href="./index.html" class="newsHeading">Released version 0.0.1</a>
+					<a href="./news.php" class="newsHeading">Released version 0.0.1</a>
 					<p class="newsDate">April 29, 2003</p>
 					<p class="newsSummary">
 						<ul>
