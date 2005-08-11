@@ -231,6 +231,30 @@ CLASS="REPLACEABLE"
 ></CODE
 >] [<CODE
 CLASS="OPTION"
+>--timestamp-format=FORMAT <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>--time-format=FORMAT <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
+>--date-format=FORMAT <TT
+CLASS="REPLACEABLE"
+><I
+></I
+></TT
+></CODE
+>] [<CODE
+CLASS="OPTION"
 >--empty-string-is-null <TT
 CLASS="REPLACEABLE"
 ><I
@@ -258,7 +282,7 @@ CLASS="REPLACEABLE"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN103"
+NAME="AEN112"
 ></A
 ><H2
 >DESCRIPTION</H2
@@ -281,14 +305,14 @@ CLASS="COMMAND"
 			import the records into a relational database. The sql output is optimized
 			to be used with PostgreSQL.</P
 ><P
->The programm currently supports only a subset of possible field
-		  types.  These are strings, short and long integers, boolean, bcd, blobs
-			and decimal numbers.</P
+>The programm can read encrypted an unencrypted .db and .mb files.
+		  There is not need to provide a password in order to read encrypted files.
+			</P
 ></DIV
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN110"
+NAME="AEN119"
 ></A
 ><H2
 >OPTIONS</H2
@@ -666,7 +690,7 @@ CLASS="OPTION"
 					 by the insert statement,
 					 but uses a form like 'insert into tablename values (...)'.
 					 Such statements will only work if the table has the same number
-					 of fields in the same sequence as the INSERT statement lists the
+					 of fields in the same order as the INSERT statement lists the
 					 field values. This option will mostly not be appropriate if you
 					 want to extract some fields from a larger table (--fields) and
 					 populate an existing sql table whose schema is not identical to
@@ -724,6 +748,42 @@ CLASS="OPTION"
 						is to tread them as empty strings. By passing this option they
 						will be treaded as NULL strings in the sql output.</P
 ></DD
+><DT
+><CODE
+CLASS="OPTION"
+>--timestamp-format=FORMAT</CODE
+></DT
+><DD
+><P
+>Overrides the default format for outputing timestamps.
+					  The default is set to 'Y-m-d H:i:s'. Check the section on
+						'Date/Time formats' for a complete list of placeholders in the
+						format string.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>--time-format=FORMAT</CODE
+></DT
+><DD
+><P
+>Overrides the default format for outputing times.
+					  The default is set to 'H:i:s'. Check the section on
+						'Date/Time formats' for a complete list of placeholders in the
+						format string.</P
+></DD
+><DT
+><CODE
+CLASS="OPTION"
+>--date-format=FORMAT</CODE
+></DT
+><DD
+><P
+>Overrides the default format for outputing dates.
+					  The default is set to 'Y-m-d'. Check the section on
+						'Date/Time formats' for a complete list of placeholders in the
+						format string.</P
+></DD
 ></DL
 ></DIV
 ><P
@@ -741,7 +801,7 @@ CLASS="OPTION"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN275"
+NAME="AEN299"
 ></A
 ><H2
 >BLOB FILES</H2
@@ -761,7 +821,7 @@ CLASS="OPTION"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN279"
+NAME="AEN303"
 ></A
 ><H2
 >PRIMARY INDEX FILES</H2
@@ -839,7 +899,153 @@ CLASS="OPTION"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN290"
+NAME="AEN314"
+></A
+><H2
+>DATE/TIME FORMATS</H2
+><P
+>Paradox knows three field types for date and time values. Each
+		  of those can be formated by specifying a format string with the
+			options <CODE
+CLASS="OPTION"
+>--timestamp-format</CODE
+>,
+			<CODE
+CLASS="OPTION"
+>--time-format</CODE
+>, <CODE
+CLASS="OPTION"
+>--date-format</CODE
+>.</P
+><P
+>A format string contains arbitrary characters with some of them
+		  having a special meaning. The following list describes the characters
+			with a special meaning.</P
+><P
+></P
+><DIV
+CLASS="VARIABLELIST"
+><DL
+><DT
+>Y</DT
+><DD
+><P
+>A full numeric representation of a year, 4 digits
+					 (e.g. 1999 or 2004).</P
+></DD
+><DT
+>y</DT
+><DD
+><P
+>A two digit representation of a year (e.g. 99 or 04).</P
+></DD
+><DT
+>m</DT
+><DD
+><P
+>Numeric representation of a month, with leading zeros, 01 to 12.</P
+></DD
+><DT
+>n</DT
+><DD
+><P
+>Numeric representation of a month, without leading zeros, 1 to 12.</P
+></DD
+><DT
+>d</DT
+><DD
+><P
+>Day of the month, 2 digits with leading zeros, 01 to 31.</P
+></DD
+><DT
+>j</DT
+><DD
+><P
+>Day of the month without leading zeros, 1 to 31</P
+></DD
+><DT
+>H</DT
+><DD
+><P
+>24-hour format of an hour with leading zeros, 00 to 23.</P
+></DD
+><DT
+>h</DT
+><DD
+><P
+>12-hour format of an hour with leading zeros, 01 to 12.</P
+></DD
+><DT
+>G</DT
+><DD
+><P
+>24-hour format of an hour without leading zeros, 0 to 23.</P
+></DD
+><DT
+>g</DT
+><DD
+><P
+>12-hour format of an hour without leading zeros, 1 to 12.</P
+></DD
+><DT
+>i</DT
+><DD
+><P
+>Minutes with leading zeros, 00 to 59.</P
+></DD
+><DT
+>s</DT
+><DD
+><P
+>Seconds, with leading zeros, 00 to 59.</P
+></DD
+><DT
+>A</DT
+><DD
+><P
+>Uppercase Ante meridiem and Post meridiem, AM or PM.</P
+></DD
+><DT
+>a</DT
+><DD
+><P
+>Lowercase Ante meridiem and Post meridiem, am or pm.</P
+></DD
+><DT
+>S</DT
+><DD
+><P
+>English ordinal suffix for the day of the month, 2 characters, st, nd, rd, or th.</P
+></DD
+><DT
+>L</DT
+><DD
+><P
+>Whether it's a leap year, 1 if it is a leap year, 0 otherwise.</P
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN386"
+></A
+><H2
+>ENCRYPTED FILES</H2
+><P
+>Paradox supports file encryption for .db and .mb files. pxview
+		  can read encrypted files without specifying a password. You will actually
+			not notice while reading a paradox file whether it is encrypted or not.
+			The only difference is an extra line in the information output, listing
+			the encryption vector which is a 4 byte hash value of the password.
+			There is currently no way for pxview to regain the passwort from
+			the hash.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN389"
 ></A
 ><H2
 >SEE ALSO</H2
@@ -849,7 +1055,7 @@ NAME="AEN290"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN293"
+NAME="AEN392"
 ></A
 ><H2
 >AUTHOR</H2
