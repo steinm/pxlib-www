@@ -25,7 +25,7 @@ NAME="AEN15"
 ></A
 ><H2
 >Name</H2
->PX_timestamp2string&nbsp;--&nbsp;duplicate a string</DIV
+>PX_timestamp2string&nbsp;--&nbsp;Convert paradox timestamp into formated string</DIV
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
@@ -47,21 +47,33 @@ NAME="AEN21"
 >DESCRIPTION</H2
 ><P
 >Creates a string representation of a paradox timestamp as specified
-		  in the parameter <CODE
+			in the parameter <CODE
 CLASS="PARAMETER"
 >format</CODE
->.
-		  The timestamp must be retrieved with PX_get_data_double(3). A timestamp
-			contains both time and date information. The format string contains chars
-			which stand for certain values of the date/time. The following table lists
-			all available characters with a meaning. All other characters are being
+>.  The timestamp must be
+			either retrieved with <CODE
+CLASS="FUNCTION"
+>PX_get_data_double(3)</CODE
+> after
+			calling <CODE
+CLASS="FUNCTION"
+>PX_get_record(3)</CODE
+> or by simply using the
+			double value in the pxval_t struct as returned by
+			<CODE
+CLASS="FUNCTION"
+>PX_retrieve_record(3)</CODE
+>. A timestamp contains both
+			time and date information. The format string contains chars which stand
+			for certain values of the date/time. The following table lists all
+			available characters with a meaning. All other characters are being
 			copied unmodified to the output string. If a special character shall not
 			be interpreted it must be preceded with a backslash.</P
 ><P
 >		 <DIV
 CLASS="TABLE"
 ><A
-NAME="AEN26"
+NAME="AEN29"
 ></A
 ><P
 ><B
@@ -178,7 +190,7 @@ CLASS="CALSTABLE"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN79"
+NAME="AEN82"
 ></A
 ><H2
 >RETURN VALUE</H2
@@ -188,17 +200,17 @@ NAME="AEN79"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN82"
+NAME="AEN85"
 ></A
 ><H2
 >SEE ALSO</H2
 ><P
->PX_new2(3)</P
+>PX_time2string(3), PX_date2string(3)</P
 ></DIV
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN85"
+NAME="AEN88"
 ></A
 ><H2
 >AUTHOR</H2
