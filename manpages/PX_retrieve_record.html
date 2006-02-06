@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>PX_RETRIEVE_RECORD</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"></HEAD
+><BODY
+CLASS="REFENTRY"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><H1
+><A
+NAME="AEN1"
+></A
+>PX_RETRIEVE_RECORD</H1
+><DIV
+CLASS="REFNAMEDIV"
+><A
+NAME="AEN15"
+></A
+><H2
+>Name</H2
+>PX_retrieve_record&nbsp;--&nbsp;Returns record in Paradox file</DIV
+><DIV
+CLASS="REFSYNOPSISDIV"
+><A
+NAME="AEN18"
+></A
+><H2
+>Synopsis</H2
+><P
+>#include &lt;paradox.h&gt;</P
+><P
+>pxval_t ** PX_retrieve_record(pxdoc_t *pxdoc, int recno)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN21"
+></A
+><H2
+>DESCRIPTION</H2
+><P
+>Returns the record with the given number in a Paradox file. The
+		  first record has number 0, the last one has number_of_records-1.</P
+><P
+>If you are accessing several records, do it in ascending order, because
+		  this is the most efficient way.</P
+><P
+>The return value is an array of field values. Each value is stored in
+		  a structure like the following:</P
+><PRE
+CLASS="PROGRAMLISTING"
+>typedef struct px_val pxval_t;
+struct px_val {
+	char isnull;
+	int type;
+	union {
+		long lval;
+		double dval;
+		struct {
+			char *val;
+			int len;
+		} str;
+	} value;
+};
+		</PRE
+><P
+>The element <CODE
+CLASS="PARAMETER"
+>isnull</CODE
+> is set to 1 if the
+		  value is NULL otherwise it is set to 0. <CODE
+CLASS="PARAMETER"
+>type</CODE
+>
+			is the type of paradox field as defined in <TT
+CLASS="FILENAME"
+>paradox.h</TT
+>.
+			A field value can be either a long int, a double or a string, depending
+			on the paradox field type. The paradox field types pxfShort, pxfLong,
+			pxfDate, pxfTime, and pxfAutoInc are returned as long int values.
+			pxfTimestamp, pxfNumber, and pxfCurrency are returned as double values
+			and all remaining paradox field types are stored as strings with the length
+			in <TT
+CLASS="LITERAL"
+>value.len</TT
+>. You can rely in strings being Null
+			terminated.</P
+><P
+>The paradox field types pxfTimestamp, pxfTime, an pxfDate use an
+		  uncommon format which can be formated into a string with
+			<CODE
+CLASS="FUNCTION"
+>PX_timestamp2string(3)</CODE
+>,
+			<CODE
+CLASS="FUNCTION"
+>PX_time2string(3)</CODE
+>, and
+			<CODE
+CLASS="FUNCTION"
+>PX_date2string(3)</CODE
+>.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN36"
+></A
+><H2
+>RETURN VALUE</H2
+><P
+>Returns a pointer on success and NULL on failure.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN39"
+></A
+><H2
+>SEE ALSO</H2
+><P
+>PX_update_record(3), PX_timestamp2string(3), PX_time2string(3),
+		  PX_date2string(3)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN42"
+></A
+><H2
+>AUTHOR</H2
+><P
+>This manual page was written by Uwe Steinmann <CODE
+CLASS="EMAIL"
+>&#60;<A
+HREF="mailto:uwe@steinmann.cx"
+>uwe@steinmann.cx</A
+>&#62;</CODE
+>.</P
+></DIV
+></BODY
+></HTML
+>

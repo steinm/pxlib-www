@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>PX_UPDATE_RECORD</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"></HEAD
+><BODY
+CLASS="REFENTRY"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><H1
+><A
+NAME="AEN1"
+></A
+>PX_UPDATE_RECORD</H1
+><DIV
+CLASS="REFNAMEDIV"
+><A
+NAME="AEN15"
+></A
+><H2
+>Name</H2
+>PX_update_record&nbsp;--&nbsp;Updates an exiting record in the Paradox file</DIV
+><DIV
+CLASS="REFSYNOPSISDIV"
+><A
+NAME="AEN18"
+></A
+><H2
+>Synopsis</H2
+><P
+>#include &lt;paradox.h&gt;</P
+><P
+>int PX_update_record(pxdoc_t *pxdoc, pxval_t **data, int recpos)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN21"
+></A
+><H2
+>DESCRIPTION</H2
+><P
+>Overwrites a record in the database with the data in the array
+		  <CODE
+CLASS="OPTION"
+>dataptr</CODE
+>. The record must be specified by its record
+			number passed as parameter <CODE
+CLASS="OPTION"
+>recpos</CODE
+>.
+			The first record has number 0.</P
+><P
+>The memory for <CODE
+CLASS="OPTION"
+>dataptr</CODE
+> can be freed after
+		  <CODE
+CLASS="FUNCTION"
+>PX_update_record</CODE
+> has been called.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN29"
+></A
+><H2
+>RETURN VALUE</H2
+><P
+>Returns 0 on success or -1 on failure.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN32"
+></A
+><H2
+>SEE ALSO</H2
+><P
+>PX_retrieve_record(3), PX_delete_record(3), PX_insert_record(3)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN35"
+></A
+><H2
+>AUTHOR</H2
+><P
+>This manual page was written by Uwe Steinmann <CODE
+CLASS="EMAIL"
+>&#60;<A
+HREF="mailto:uwe@steinmann.cx"
+>uwe@steinmann.cx</A
+>&#62;</CODE
+>.</P
+></DIV
+></BODY
+></HTML
+>

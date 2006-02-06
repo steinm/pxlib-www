@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>PX_INSERT_RECORD</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"></HEAD
+><BODY
+CLASS="REFENTRY"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><H1
+><A
+NAME="AEN1"
+></A
+>PX_INSERT_RECORD</H1
+><DIV
+CLASS="REFNAMEDIV"
+><A
+NAME="AEN15"
+></A
+><H2
+>Name</H2
+>PX_insert_record&nbsp;--&nbsp;Inserts a new record in the Paradox file</DIV
+><DIV
+CLASS="REFSYNOPSISDIV"
+><A
+NAME="AEN18"
+></A
+><H2
+>Synopsis</H2
+><P
+>#include &lt;paradox.h&gt;</P
+><P
+>int PX_insert_record(pxdoc_t *pxdoc, pxval_t **dataptr)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN21"
+></A
+><H2
+>DESCRIPTION</H2
+><P
+>Inserts a new record stored in the array <CODE
+CLASS="OPTION"
+>dataptr</CODE
+>
+		  into a Paradox file. The position of the record will be determined
+			by the function itself, starting at the beginning of the file and
+			search towards the end for a free slot. A free slot can be the result
+			of former calls of <CODE
+CLASS="FUNCTION"
+>PX_delete_record(3)</CODE
+> or not
+			completely filled data blocks in the input file. If there is no free
+			slot within the file, then a new record will be added at the
+			end.</P
+><P
+>Blobs will be automatically written if a blob file was set
+		  with <CODE
+CLASS="FUNCTION"
+>PX_set_blob_file(3)</CODE
+>.</P
+><P
+>The memory for <CODE
+CLASS="OPTION"
+>dataptr</CODE
+> and the field values
+		  can be freed after
+		  <CODE
+CLASS="FUNCTION"
+>PX_insert_record</CODE
+> has been called.</P
+><P
+>Each single element in the array of pointers to pxval_t can be easily
+			created with <TT
+CLASS="LITERAL"
+>MAKE_PXVAL(pxdoc_t *pxdoc, pxval_t *val)</TT
+>
+			and setting the actual value afterwards. A quite common way to build up
+			the record is the following:</P
+><PRE
+CLASS="PROGRAMLISTING"
+>dataptr = (pxval_t **) malloc(PX_numfields(pxdoc)*sizeof(pxval_t *));
+MAKE_PXVAL(pxdoc, dataptr[0]);
+dataptr[0]-&#62;type = pxfLong;
+dataptr[0]-&#62;value.lval = 45;
+...
+PX_insert_record(pxdoc, dataptr);
+free(dataptr[0]);
+free(dataptr);
+		</PRE
+><P
+>There is currently no need to set the type, though it is
+		  recommended.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN35"
+></A
+><H2
+>RETURN VALUE</H2
+><P
+>Returns the record number on success or -1 on failure. The number
+		  of the first record is 0.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN38"
+></A
+><H2
+>SEE ALSO</H2
+><P
+>PX_retrieve_record(3), PX_delete_record(3), PX_update_record(3)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN41"
+></A
+><H2
+>AUTHOR</H2
+><P
+>This manual page was written by Uwe Steinmann <CODE
+CLASS="EMAIL"
+>&#60;<A
+HREF="mailto:uwe@steinmann.cx"
+>uwe@steinmann.cx</A
+>&#62;</CODE
+>.</P
+></DIV
+></BODY
+></HTML
+>
