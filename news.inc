@@ -1,5 +1,5 @@
           <h1>Latest News</h1>
-					<a href="./news.php" class="newsHeading">Released version 0.6.0-rc1</a>
+					<a href="./news.php" class="newsHeading">Released version 0.6.0</a>
 					<p class="newsDate">February 6, 2006</p>
 					<p class="newsSummary">This version includes some major changes to the
 					  api while retaining compatible to older versions. If you use the
