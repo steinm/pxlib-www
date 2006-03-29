@@ -1,4 +1,22 @@
           <h1>Latest News</h1>
+					<a href="./news.php" class="newsHeading">Released version 0.6.1</a>
+					<p class="newsDate">March 29, 2006</p>
+					<p class="newsSummary">There were some bugs related to the changes
+					  of the last release. This version fixes them. Besides that the
+						following has changed:
+						<ul>
+							<li>Much better support for secondary indexes</li>
+							<li>PX_insert_record() and PX_update_record() treat null
+							  values propperly</li>
+							<li>PX_delete_record() now updates the internal index
+							  without corrupting  it.</li>
+							<li>Various man page updates.</li>
+							<li>Auto increment fields of type pxfAutoInc.</li>
+							<li>Fixed some compile errors and warnings.</li>
+							<li>Fixed various small bugs and memory leaks.</li>
+					 </ul>
+					</p>
+
 					<a href="./news.php" class="newsHeading">Released version 0.6.0</a>
 					<p class="newsDate">February 6, 2006</p>
 					<p class="newsSummary">This version includes some major changes to the
@@ -10,7 +28,7 @@
               <li>Added new functions PX_delete_record(), PX_update_record(), PX_insert_record(), PX_retrieve_record()</li>
 							<li>reading and writing encrypted blob files is more efficient.</li>
               <li>No more than 64 blobs will be stored in blocks of type 3</li>
-							<li>Fixed various small bugs and memory leaks.
+							<li>Fixed various small bugs and memory leaks.</li>
 					 </ul>
 					</p>
 
