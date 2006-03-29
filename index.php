@@ -21,10 +21,10 @@
 					</p>
 					<h2>Software that uses pxlib</h2>
 					<p>
-						There are currently two larger projects using pxlib.
+						There are currently two larger open source projects using pxlib:
 						<ul>
-							<li>gnumeric</li>
-							<li>knoda (hk_classes)</li>
+							<li>gnumeric,</li>
+							<li>knoda (hk_classes).</li>
 						</ul>
 					</p>
 					<p>
