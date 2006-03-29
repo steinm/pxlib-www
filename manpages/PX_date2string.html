@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>PX_DATE2STRING</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"></HEAD
+><BODY
+CLASS="REFENTRY"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><H1
+><A
+NAME="AEN1"
+></A
+>PX_DATE2STRING</H1
+><DIV
+CLASS="REFNAMEDIV"
+><A
+NAME="AEN15"
+></A
+><H2
+>Name</H2
+>PX_date2string&nbsp;--&nbsp;Convert paradox date into formated string</DIV
+><DIV
+CLASS="REFSYNOPSISDIV"
+><A
+NAME="AEN18"
+></A
+><H2
+>Synopsis</H2
+><P
+>#include &lt;paradox.h&gt;</P
+><P
+>char * PX_date2string(pxdoc_t *pxdoc, long date, const char *format)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN21"
+></A
+><H2
+>DESCRIPTION</H2
+><P
+>Creates a string representation of a paradox date as specified
+			in the parameter <CODE
+CLASS="PARAMETER"
+>format</CODE
+>.  The date must be
+			either retrieved with <CODE
+CLASS="FUNCTION"
+>PX_get_data_long(3)</CODE
+> after
+			calling <CODE
+CLASS="FUNCTION"
+>PX_get_record(3)</CODE
+> or by simply using the
+			long value in the pxval_t struct as returned by
+			<CODE
+CLASS="FUNCTION"
+>PX_retrieve_record(3)</CODE
+>. The function uses internally
+			the <CODE
+CLASS="FUNCTION"
+>PX_timestamp2string(3)</CODE
+> function.
+			The format string may contain all chars as documented with
+			<CODE
+CLASS="FUNCTION"
+>PX_timestamp2string(3)</CODE
+>, though only those concerning
+			the date will produce resonable results.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN30"
+></A
+><H2
+>RETURN VALUE</H2
+><P
+>Returns pointer to string on success and NULL on failure.</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN33"
+></A
+><H2
+>SEE ALSO</H2
+><P
+>PX_timestamp2string(3), PX_time2string(3)</P
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN36"
+></A
+><H2
+>AUTHOR</H2
+><P
+>This manual page was written by Uwe Steinmann <CODE
+CLASS="EMAIL"
+>&#60;<A
+HREF="mailto:uwe@steinmann.cx"
+>uwe@steinmann.cx</A
+>&#62;</CODE
+>.</P
+></DIV
+></BODY
+></HTML
+>
