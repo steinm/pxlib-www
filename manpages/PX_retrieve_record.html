@@ -79,23 +79,26 @@ CLASS="PARAMETER"
 CLASS="PARAMETER"
 >type</CODE
 >
-			is the type of paradox field as defined in <TT
+			is the type of the paradox field as defined in
+			<TT
 CLASS="FILENAME"
 >paradox.h</TT
 >.
 			A field value can be either a long int, a double or a string, depending
 			on the paradox field type. The paradox field types pxfShort, pxfLong,
-			pxfDate, pxfTime, and pxfAutoInc are returned as long int values.
+			pxfDate, pxfTime, pxfLogical, and pxfAutoInc are returned as long int
+			values.
 			pxfTimestamp, pxfNumber, and pxfCurrency are returned as double values
 			and all remaining paradox field types are stored as strings with the length
 			in <TT
 CLASS="LITERAL"
 >value.len</TT
->. You can rely in strings being Null
-			terminated.</P
+>. You can rely on strings being Null
+			terminated. Blobs are stored as string but are not guarented to be
+			Null terminated.</P
 ><P
 >The paradox field types pxfTimestamp, pxfTime, an pxfDate use an
-		  uncommon format which can be formated into a string with
+		  uncommon format which can be converted into a string with
 			<CODE
 CLASS="FUNCTION"
 >PX_timestamp2string(3)</CODE
@@ -127,13 +130,28 @@ NAME="AEN39"
 ><H2
 >SEE ALSO</H2
 ><P
->PX_update_record(3), PX_timestamp2string(3), PX_time2string(3),
-		  PX_date2string(3)</P
+>			<CODE
+CLASS="FUNCTION"
+>PX_update_record(3)</CODE
+>,
+			<CODE
+CLASS="FUNCTION"
+>PX_timestamp2string(3)</CODE
+>,
+			<CODE
+CLASS="FUNCTION"
+>PX_time2string(3)</CODE
+>,
+		  <CODE
+CLASS="FUNCTION"
+>PX_date2string(3)</CODE
+>
+		</P
 ></DIV
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN42"
+NAME="AEN46"
 ></A
 ><H2
 >AUTHOR</H2

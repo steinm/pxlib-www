@@ -36,8 +36,8 @@ NAME="AEN18"
 ><P
 >pxlib is a library to read and write Paradox databases. It is far
 		  from being complete but should be very helpful for those working on
-			unix and having the need to handle paradox databases, blob files and
-			primary indexes.
+			unix and having the need to handle paradox databases, blob files,
+			primary and secondary indexes.
 			</P
 ><P
 >pxlib is a C-library with bindings for Python and PHP.
@@ -49,7 +49,9 @@ NAME="AEN18"
 			called Paradox.</P
 ><P
 >This library is the base for a gnumeric plugin which has been
-		  officially added to gnumeric in version 1.4.0.</P
+		  officially added to gnumeric in version 1.4.0. pxlib is also used
+			by hk_classes which itself is the database access utilized by
+			knoda (http://www.knoda.org).</P
 ></DIV
 ><DIV
 CLASS="REFSECT1"
@@ -71,8 +73,14 @@ CLASS="LITERAL"
 			has to be included instead of <TT
 CLASS="LITERAL"
 >paradox.h</TT
->.
-			Before reading or writing a
+>. The gsf
+			library cannot be used currently for writing because pxlib requires
+			read access on the database as well, which is not supported by libgsf.
+			In such a case you will have to create a temporary file first and
+			copy it the gsf stream afterwards.
+		</P
+><P
+>			Before reading or writing a
 			database file the library should be initialized with
 			<CODE
 CLASS="FUNCTION"
@@ -97,14 +105,7 @@ CLASS="FUNCTION"
 			with <CODE
 CLASS="FUNCTION"
 >PX_delete(3)</CODE
->. <CODE
-CLASS="FUNCTION"
->PX_new(3)</CODE
-> 
-			returns a pointer to <TT
-CLASS="LITERAL"
->pxdoc_t</TT
->. You can easily handle
+>.  You can easily handle
 			several documents at the same time, each represented by its own
 			pointer to <TT
 CLASS="LITERAL"
@@ -160,8 +161,8 @@ struct px_head {
 CLASS="LITERAL"
 >paradox.h</TT
 > and can be
-			directly
-		  accessed, thought it is not encouraged at all, because the structure will
+			accessed directly,
+		  thought it is not encouraged at all, because the structure will
 			disappear in the future. Most header values can already be read with
 			<CODE
 CLASS="FUNCTION"
@@ -170,7 +171,15 @@ CLASS="FUNCTION"
 			<CODE
 CLASS="FUNCTION"
 >PX_get_parameter(3)</CODE
->.</P
+> and set by
+			<CODE
+CLASS="FUNCTION"
+>PX_set_value(3)</CODE
+> respectively
+			<CODE
+CLASS="FUNCTION"
+>PX_set_parameter(3)</CODE
+></P
 ><P
 >The following example will do the basic
 			preparation without creating nor opening a document on the disk.</P
@@ -196,7 +205,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN50"
+NAME="AEN51"
 ></A
 ><P
 ><CODE
@@ -215,7 +224,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN59"
+NAME="AEN60"
 ></A
 ><P
 ><CODE
@@ -281,7 +290,8 @@ CLASS="FUNCTION"
 			is crucial because it also flushes unwritten blocks to disk.
 			</P
 ><P
->There are more sophisticated functions to open a Paradox database.
+>There are more sophisticated functions to create the handle for the
+		  Paradox database.
 		  They are used when error handling and memory management
 			shall be controlled by the calling application. Check the manual pages
 			<CODE
@@ -301,7 +311,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN82"
+NAME="AEN83"
 ></A
 ><P
 ><CODE
@@ -320,10 +330,16 @@ CLASS="FUNCTION"
 >. Creating a Paradox file
 			requires three further parameters to specify the database layout and the
 			file type, e.g. pxfFileTypNonIndexDB. The function can be used to create
-			both databases and primary index files. Secondary index files are not currently
-			supported. A database opened for reading cannot be written and vise versa.
-			This disadvantage may be removed in one of the next versions.
-			Each field of the database is described by a structure:</P
+			both databases and primary index files. Secondary index files are not
+			supported before version &lt;= 0.6.0 due to several bugs in pxlib.
+			Since the format of a secondary index file is indentical to a database
+			file there is actually no need for special support of secondary indexes.
+			It is left to the application to create them itself.
+			pxlib &gt;= 0.6.0 can open databases for reading and writing
+			and provide four new functions for this purpose. They will be
+			described in the section `Modifying a database'.</P
+><P
+>			Each field of the database is described by a structure:</P
 ><PRE
 CLASS="PROGRAMLISTING"
 >typedef struct px_field pxfield_t;
@@ -346,7 +362,7 @@ CLASS="FUNCTION"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN101"
+NAME="AEN103"
 ></A
 ><H2
 >READING RECORDS FROM A DATABASE</H2
@@ -363,7 +379,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN104"
+NAME="AEN106"
 ></A
 ><P
 ><CODE
@@ -382,7 +398,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN117"
+NAME="AEN119"
 ></A
 ><P
 ><CODE
@@ -397,7 +413,8 @@ CLASS="FUNCDEF"
 ><P
 >The second function returns additional data about the internal
 		  location
-			of the record within the file, which is mostly valueable for debuging.
+			of the record within the file, which is mostly valueable for debuging
+			or creating a seconday index.
 			Both functions need a record number starting at 0 for the first record
 			and a memory area large enough for the record. The size of that area
 			can be determined by the function <CODE
@@ -409,12 +426,15 @@ CLASS="FUNCTION"
 			modifications.</P
 ><P
 >Paradox files can be encrypted. pxlib will automatically decrypt
-		  a file while reading without the need to supply a password.</P
+		  a file while reading without the need to supply a password. This is
+			possible because of a very weak encryption algorithmn and the password
+			being stored in the database file itself.</P
 ><P
 >			Once the record data has been read it can be accessed with a number of
 			different functions depending on the field type. The following
 			list contains the field type and the function needed to retrieve
-			the value.</P
+			the value. Nothing can prevent you from accessing the record data
+			in a different way if you know what you are doing.</P
 ><P
 >		<P
 ></P
@@ -430,7 +450,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN141"
+NAME="AEN143"
 ></A
 ><P
 ><CODE
@@ -458,7 +478,9 @@ CLASS="FUNCTION"
            be freed by the application. The chunk of memory can be different
 					 from len when encoding involves conversion from a 1-byte to a
 					 2-byte character representaion. This is also the reason why the
-					 application cannot precisly allocate the memory for the data.
+					 application cannot precisly allocate the memory for the data and
+					 it must be left to pxlib. Read the section about `Memory
+					 allocation' for more details.
 			  </P
 ></DD
 ><DT
@@ -470,7 +492,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN160"
+NAME="AEN162"
 ></A
 ><P
 ><CODE
@@ -485,7 +507,7 @@ CLASS="FUNCDEF"
 >
 			 </P
 ><P
->Fields of type date are actually 4 byte interger values counting
+>Fields of type date are actually 4 byte integer values counting
 			   days since jan-00-0000. In order to convert it into 3 single integers
 				 for year, month and
 				 day, you will have to add 1721425 to the value and call the function
@@ -496,7 +518,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN174"
+NAME="AEN176"
 ></A
 ><P
 ><CODE
@@ -513,6 +535,10 @@ CLASS="FUNCDEF"
 ><P
 >			   in order to get a valid date. The value 1721425 is the number of days
 				 between the start of the julian calendar (4714 BC) and jan-00-0000.
+				 <CODE
+CLASS="PARAMETER"
+>len</CODE
+> must be set to 4.
 			 </P
 ></DD
 ><DT
@@ -524,7 +550,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN191"
+NAME="AEN194"
 ></A
 ><P
 ><CODE
@@ -537,7 +563,14 @@ CLASS="FUNCDEF"
 ></P
 ></DIV
 >
-			   </P
+			 </P
+><P
+>			 	 This type is a short integer which is 2 bytes long.
+				 <CODE
+CLASS="PARAMETER"
+>len</CODE
+> must be set to 2.
+			 </P
 ></DD
 ><DT
 >pxfLong, pxfAutoInc</DT
@@ -548,7 +581,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN207"
+NAME="AEN212"
 ></A
 ><P
 ><CODE
@@ -562,6 +595,13 @@ CLASS="FUNCDEF"
 ></DIV
 >
 			 </P
+><P
+>			 	 This type is a integer which is 4 bytes long.
+				 <CODE
+CLASS="PARAMETER"
+>len</CODE
+> must be set to 4.
+			 </P
 ></DD
 ><DT
 >pxfNumber, pxfCurrency</DT
@@ -572,7 +612,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN223"
+NAME="AEN230"
 ></A
 ><P
 ><CODE
@@ -586,6 +626,13 @@ CLASS="FUNCDEF"
 ></DIV
 >
 			 </P
+><P
+>			 	 These types are floating poing numbers.
+				 <CODE
+CLASS="PARAMETER"
+>len</CODE
+> must be set to 8.
+			 </P
 ></DD
 ><DT
 >pxfLogical</DT
@@ -596,7 +643,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN239"
+NAME="AEN248"
 ></A
 ><P
 ><CODE
@@ -611,7 +658,11 @@ CLASS="FUNCDEF"
 >
        </P
 ><P
->The extracted value is either 0 (false) or &#62;0 (true).
+>The extracted value is either 0 (false) or &lt;0 (true).
+				 <CODE
+CLASS="PARAMETER"
+>len</CODE
+> must be set to 1.
 			 </P
 ></DD
 ><DT
@@ -623,7 +674,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN256"
+NAME="AEN266"
 ></A
 ><P
 ><CODE
@@ -651,7 +702,9 @@ CLASS="FUNCTION"
 >pxfOLE</DT
 ><DD
 ><P
-></P
+>This type is not supported because there is too little
+			   known about it. Accessing fields of type pxfOLE like fields
+				 of type pxfBLOb may work.</P
 ></DD
 ><DT
 >pxfGraphic</DT
@@ -662,7 +715,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN282"
+NAME="AEN292"
 ></A
 ><P
 ><CODE
@@ -675,6 +728,9 @@ CLASS="FUNCDEF"
 ></P
 ></DIV
 >
+       </P
+><P
+>			  This function has not been tested very well. 
        </P
 ></DD
 ><DT
@@ -703,7 +759,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN309"
+NAME="AEN320"
 ></A
 ><P
 ><CODE
@@ -738,7 +794,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN325"
+NAME="AEN336"
 ></A
 ><P
 ><CODE
@@ -766,7 +822,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN342"
+NAME="AEN353"
 ></A
 ><P
 ><CODE
@@ -961,7 +1017,7 @@ CLASS="PROGRAMLISTING"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN361"
+NAME="AEN372"
 ></A
 ><H2
 >WRITING RECORDS INTO A DATABASE</H2
@@ -1022,7 +1078,101 @@ main(int argc, char *argv[]) {
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN371"
+NAME="AEN382"
+></A
+><H2
+>MODIFYING A DATABASE</H2
+><P
+>Starting from version 0.6.0 pxlib supports to open databases for
+		  reading and writing at the same time. If you intend to do so, please
+			ensure to open the file for the database in `w+', `r+', or `a+'
+			mode. You will also have to use a new set of functions as described
+			below.</P
+><DIV
+CLASS="FUNCSYNOPSIS"
+><P
+></P
+><A
+NAME="AEN385"
+></A
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>int PX_insert_record</CODE
+>(pxdoc_t *pxdoc, pxval_t **data);</CODE
+></P
+><P
+></P
+></DIV
+><P
+><CODE
+CLASS="FUNCTION"
+>PX_insert_record(3)</CODE
+> inserts a new record into
+		  a database.</P
+><DIV
+CLASS="FUNCSYNOPSIS"
+><P
+></P
+><A
+NAME="AEN395"
+></A
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>int PX_update_record</CODE
+>(pxdoc_t *pxdoc, pxval_t **data, int recno);</CODE
+></P
+><P
+></P
+></DIV
+><P
+><CODE
+CLASS="FUNCTION"
+>PX_update_record(3)</CODE
+> updates an existing
+		  record in database.</P
+><DIV
+CLASS="FUNCSYNOPSIS"
+><P
+></P
+><A
+NAME="AEN407"
+></A
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>int PX_delete_record</CODE
+>(pxdoc_t *pxdoc, int recno);</CODE
+></P
+><P
+></P
+></DIV
+><DIV
+CLASS="FUNCSYNOPSIS"
+><P
+></P
+><A
+NAME="AEN415"
+></A
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>int PX_retrieve_record</CODE
+>(pxdoc_t *pxdoc, int recno);</CODE
+></P
+><P
+></P
+></DIV
+></DIV
+><DIV
+CLASS="REFSECT1"
+><A
+NAME="AEN423"
 ></A
 ><H2
 >ENCODING</H2
@@ -1043,7 +1193,7 @@ CLASS="LITERAL"
 			the unmodified value unless the target encoding has been set by
 			<CODE
 CLASS="FUNCTION"
->PX_set_paramter(3)</CODE
+>PX_set_parameter(3)</CODE
 > differently
 			from the one stored in the database header. If the target encoding
 			is set differently <CODE
@@ -1058,7 +1208,7 @@ CLASS="FUNCTION"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN378"
+NAME="AEN430"
 ></A
 ><H2
 >READING BLOBS</H2
@@ -1076,7 +1226,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN383"
+NAME="AEN435"
 ></A
 ><P
 ><CODE
@@ -1098,7 +1248,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN401"
+NAME="AEN453"
 ></A
 ><P
 ><CODE
@@ -1139,7 +1289,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN424"
+NAME="AEN476"
 ></A
 ><P
 ><CODE
@@ -1157,7 +1307,7 @@ CLASS="FUNCDEF"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN432"
+NAME="AEN484"
 ></A
 ><H2
 >WRITING BLOBS</H2
@@ -1169,7 +1319,7 @@ NAME="AEN432"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN435"
+NAME="AEN487"
 ></A
 ><H2
 >MEMORY MANAGEMENT, ERROR HANDLING</H2
@@ -1190,7 +1340,7 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN440"
+NAME="AEN492"
 ></A
 ><P
 ><CODE
@@ -1220,7 +1370,7 @@ CLASS="PARAMETER"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN459"
+NAME="AEN511"
 ></A
 ><H2
 >ENCRYPTION</H2
@@ -1236,7 +1386,7 @@ NAME="AEN459"
 			for calculating the checksum. The password can be set with
 			<CODE
 CLASS="FUNCTION"
->PX_set_paramter(3)</CODE
+>PX_set_parameter(3)</CODE
 >. Once it is set, encryption
 			is automatically turned on. The password must be set before writing
 			any records. The best place to do this, is right after calling
@@ -1252,7 +1402,7 @@ CLASS="FUNCTION"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN465"
+NAME="AEN517"
 ></A
 ><H2
 >SEE ALSO</H2
@@ -1262,7 +1412,7 @@ NAME="AEN465"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN468"
+NAME="AEN520"
 ></A
 ><H2
 >AUTHOR</H2

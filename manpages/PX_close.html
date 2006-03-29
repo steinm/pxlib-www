@@ -46,14 +46,33 @@ NAME="AEN21"
 ><H2
 >DESCRIPTION</H2
 ><P
->Closes a Paradox file. Do not confuse this function with PX_delete(3)
-		  which has to be called after PX_close to free all resources used for
-			the database.</P
+>Closes a Paradox file. Do not confuse this function with
+		  <CODE
+CLASS="FUNCTION"
+>PX_delete(3)</CODE
+> which has to be called after
+			<CODE
+CLASS="FUNCTION"
+>PX_close(3)</CODE
+> to free all resources used for
+			the database. <CODE
+CLASS="FUNCTION"
+>PX_close(3)</CODE
+> closes the associated
+			file if it was opened by pxlib. If the database file was opened with
+			<CODE
+CLASS="FUNCTION"
+>fopen(3)</CODE
+> it must be closed with
+			<CODE
+CLASS="FUNCTION"
+>flcose(3)</CODE
+> by the calling application.</P
 ></DIV
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN24"
+NAME="AEN29"
 ></A
 ><H2
 >SEE ALSO</H2
@@ -63,7 +82,7 @@ NAME="AEN24"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN27"
+NAME="AEN32"
 ></A
 ><H2
 >AUTHOR</H2

@@ -52,7 +52,7 @@ CLASS="OPTION"
 >
 		  into a Paradox file. The position of the record will be determined
 			by the function itself, starting at the beginning of the file and
-			search towards the end for a free slot. A free slot can be the result
+			searching towards the end for a free slot. A free slot can be the result
 			of former calls of <CODE
 CLASS="FUNCTION"
 >PX_delete_record(3)</CODE
@@ -86,23 +86,36 @@ CLASS="LITERAL"
 			the record is the following:</P
 ><PRE
 CLASS="PROGRAMLISTING"
->dataptr = (pxval_t **) malloc(PX_numfields(pxdoc)*sizeof(pxval_t *));
+>dataptr = (pxval_t **) malloc(PX_get_num_fields(pxdoc)*sizeof(pxval_t *));
 MAKE_PXVAL(pxdoc, dataptr[0]);
 dataptr[0]-&#62;type = pxfLong;
 dataptr[0]-&#62;value.lval = 45;
+dataptr[1]-&#62;type = pxfAlpha;
+dataptr[1]-&#62;value.str.val = "test";
+dataptr[1]-&#62;value.str.len = 4;
 ...
 PX_insert_record(pxdoc, dataptr);
 free(dataptr[0]);
+free(dataptr[1]);
 free(dataptr);
 		</PRE
 ><P
 >There is currently no need to set the type, though it is
 		  recommended.</P
+><P
+>The field types pxfMemoBLOb and pxfFmtMemoBLOb are treated
+		  like strings.</P
+><P
+>Fields of type pxfAutoInc are automatically incremented if
+		  its value is set to NULL. In such a case the value is taken from
+			the header of the database. You should not have more than one
+			field of type pxfAutoInc in your database, otherwise the
+			automatic incrementation will not work.</P
 ></DIV
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN35"
+NAME="AEN37"
 ></A
 ><H2
 >RETURN VALUE</H2
@@ -113,17 +126,29 @@ NAME="AEN35"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN38"
+NAME="AEN40"
 ></A
 ><H2
 >SEE ALSO</H2
 ><P
->PX_retrieve_record(3), PX_delete_record(3), PX_update_record(3)</P
+>			<CODE
+CLASS="FUNCTION"
+>PX_retrieve_record(3)</CODE
+>,
+			<CODE
+CLASS="FUNCTION"
+>PX_delete_record(3)</CODE
+>,
+			<CODE
+CLASS="FUNCTION"
+>PX_update_record(3)</CODE
+>
+		</P
 ></DIV
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN41"
+NAME="AEN46"
 ></A
 ><H2
 >AUTHOR</H2

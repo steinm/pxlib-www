@@ -51,12 +51,22 @@ NAME="AEN21"
 CLASS="OPTION"
 >pxdoc</CODE
 > must be created before
-			with PX_new(3) or PX_new2(3). The file must be opened in read/write mode
-			(w+) with fopen(3). <CODE
+			with <CODE
+CLASS="FUNCTION"
+>PX_new(3)</CODE
+> or <CODE
+CLASS="FUNCTION"
+>PX_new2(3)</CODE
+>.
+			The file must be opened in read/write mode
+			(w+) with <CODE
+CLASS="FUNCTION"
+>fopen(3)</CODE
+>. <CODE
 CLASS="OPTION"
 >fields</CODE
-> is an array
-			of <CODE
+> is an
+			array of <CODE
 CLASS="OPTION"
 >numfields</CODE
 > field specifications to set the
@@ -75,17 +85,20 @@ CLASS="FUNCTION"
 			The field name can be
 			left empty if a primary index file is to be created. The type of the
 			file can be set in the last parameter. Currently only database
-			(pxfFileTypIndexDB, pxfFileTypNonIndexDB)
+			(pxfFileTypIndexDB, pxfFileTypNonIndexDB) and
 			primary index (pxfFileTypPrimIndex) files are supported.</P
 ><P
 >After creating the paradox database you may want to call
-		  PX_set_tablename(3) in order to set the table name as it is stored
-			in the header of the database.</P
+		  <CODE
+CLASS="FUNCTION"
+>PX_set_tablename(3)</CODE
+> in order to set the table
+			name as it is stored in the header of the database.</P
 ></DIV
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN30"
+NAME="AEN34"
 ></A
 ><H2
 >RETURN VALUE</H2
@@ -95,7 +108,7 @@ NAME="AEN30"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN33"
+NAME="AEN37"
 ></A
 ><H2
 >SEE ALSO</H2
@@ -105,7 +118,7 @@ NAME="AEN33"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN36"
+NAME="AEN40"
 ></A
 ><H2
 >AUTHOR</H2

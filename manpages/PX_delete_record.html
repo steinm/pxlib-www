@@ -51,19 +51,22 @@ CLASS="OPTION"
 >recpos</CODE
 > from the
 		  Paradox file. The first record has number 0. The data of the record
-			will not be wiped out, making it possible to reconstruct it later
-			unless it was overwritten.
-			Calls of <CODE
+			will be wiped out, making it impossible to reconstruct it later.
+			The data block where the record was stored is reconstruct to make
+			sure all records are at the beginning of the data block followed by
+			the free space.</P
+><P
+>			Calls of <CODE
 CLASS="FUNCTION"
 >PX_insert_record(3)</CODE
 > will use
-			the space left by this function and overwrite the data.
-			</P
+			the first datablock with free space and add the new record
+			after the records in the data block.</P
 ></DIV
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN26"
+NAME="AEN27"
 ></A
 ><H2
 >RETURN VALUE</H2
@@ -73,7 +76,7 @@ NAME="AEN26"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN29"
+NAME="AEN30"
 ></A
 ><H2
 >SEE ALSO</H2
@@ -83,7 +86,7 @@ NAME="AEN29"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN32"
+NAME="AEN33"
 ></A
 ><H2
 >AUTHOR</H2
