@@ -1,4 +1,11 @@
           <h1>Latest News</h1>
+					<a href="./news.php" class="newsHeading">Released version 0.6.2</a>
+					<p class="newsDate">September 19, 2007</p>
+					<p class="newsSummary">This one fixes a long lasting bug on 64 bit
+					  architectures. It also is compilable in a mingw environment
+						and Visual C++ with the help of cmake.
+					</p>
+
 					<a href="./news.php" class="newsHeading">Released version 0.6.1</a>
 					<p class="newsDate">March 29, 2006</p>
 					<p class="newsSummary">There were some bugs related to the changes
