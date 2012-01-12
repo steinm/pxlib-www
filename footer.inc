@@ -19,7 +19,7 @@
       </span>
 
       <strong>URI &raquo;</strong> http://pxlib.sourceforge.net
-      &bull; <strong>Updated &raquo;</strong> 2004-Oct-24 10:31 +1000
+      &bull; <strong>Updated &raquo;</strong> 2012-Jan-12 8:15 +1000
     </div>
   </body>
 </html>
