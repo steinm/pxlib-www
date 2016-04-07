@@ -1,4 +1,10 @@
           <h1>Latest News</h1>
+					<a href="./news.php" class="newsHeading">Released version 0.6.6</a>
+					<p class="newsDate">April 07, 2016</p>
+					<p class="newsSummary">
+					  This release fixes some more typos in the documentation.
+					</p>
+
 					<a href="./news.php" class="newsHeading">Released version 0.6.5</a>
 					<p class="newsDate">Jannuary 11, 2012</p>
 					<p class="newsSummary">pxlib isn't dead, its development has
